@@ -1,62 +1,81 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// using Facebook.Unity;
-// using ElephantSDK;
+using FFStudio;
+using Facebook.Unity;
+using ElephantSDK;
 
 namespace FFStudio
 {
     public class FFAnalitic : MonoBehaviour
     {
-        // private void Awake()
-        // {
-        //     if (!FB.IsInitialized)
-        //         FB.Init(OnFacebookInitialized, OnHideUnity);
-        //     else
-        //         FB.ActivateApp();
-
-        //     gameObject.AddComponent<ElephantCore>();
-
-        //     ElephantCore.onInitialized += OnElephantInitiliazed;
-        //     ElephantCore.onRemoteConfigLoaded += OnElephantRemoveConfigLoaded;
-        //     ElephantCore.onOpen += OnElephantOpen;
-        // }
-
-        // private void Start()
-        // {
-        //     Elephant.Init(false, true);
-        // }
-
-        // void OnElephantInitiliazed()
-        // {
-        //     Debug.Log("[FFAnalitic] Elephant initiliazed");
-        // }
-        // void OnElephantRemoveConfigLoaded()
-        // {
-        //     Debug.Log("[FFAnalitic] Elephant Remote Config Loaded");
-        // }
-        // void OnElephantOpen(bool gdprRequired)
-        // {
-
-        // }
-        // void OnFacebookInitialized()
-        // {
-        //     if (FB.IsInitialized)
-        //     {
-        //         FB.ActivateApp();
-        //         Debug.Log("[FFAnalitic] Facebook initiliazed");
-        //     }
-        //     else
-        //         Debug.Log("[FFAnalitic] Failed to initialize Facebook SDK");
+		#region Fields
+		[Header( "Event Listeners" )]
+		public EventListenerDelegateResponse elephantEventListener;
+            
+        #endregion
 
 
-        //     DontDestroyOnLoad(gameObject);
+		#region UnityAPI
+        private void OnEnable()
+        {
+			elephantEventListener.OnEnable();
+		}
 
-        // }
+        private void OnDisable()
+        {
+			elephantEventListener.OnDisable();
+		}
 
-        // void OnHideUnity(bool hide)
-        // {
+        private void Awake()
+        {
+			elephantEventListener.response = ElephantEventResponse;
 
-        // }
+			if (!FB.IsInitialized)
+                FB.Init(OnFacebookInitialized, OnHideUnity);
+            else
+                FB.ActivateApp();
+        }
+
+        #endregion
+
+        #region Implementation
+        void ElephantEventResponse()
+        {
+			var gameEvent = elephantEventListener.gameEvent as ElephantLevelEvent;
+
+            switch (gameEvent.elephantEventType)
+            {
+                case ElephantEvent.LevelStarted: Elephant.LevelStarted( gameEvent.level );
+                    FFLogger.Log( "FFAnalytic Elephant LevelStarted: " + gameEvent.level );
+					break;
+                case ElephantEvent.LevelCompleted: Elephant.LevelCompleted( gameEvent.level );
+                    FFLogger.Log( "FFAnalytic Elephant LevelFinished: " + gameEvent.level);
+					break;
+                case ElephantEvent.LevelFailed: Elephant.LevelFailed( gameEvent.level );
+                    FFLogger.Log( "FFAnalytic Elephant LevelFailed: " + gameEvent.level );
+					break;
+			}
+		}
+        void OnFacebookInitialized()
+        {
+            if (FB.IsInitialized)
+            {
+                FB.ActivateApp();
+                Debug.Log("[FFAnalitic] Facebook initiliazed");
+            }
+            else
+                Debug.Log("[FFAnalitic] Failed to initialize Facebook SDK");
+
+
+            DontDestroyOnLoad(gameObject);
+
+        }
+
+        void OnHideUnity(bool hide)
+        {
+
+        }
+        #endregion
     }
 }
