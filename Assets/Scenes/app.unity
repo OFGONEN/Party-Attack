@@ -247,6 +247,7 @@ MonoBehaviour:
     gameEvent: {fileID: 11400000, guid: 0a3e52cd505ecfc4ba9ef153d4f3ba93, type: 2}
   levelLoaded: {fileID: 11400000, guid: 08b9079fb856230459ba418b28981185, type: 2}
   cleanUpEvent: {fileID: 11400000, guid: f21917f15c7136344a403d144e13d6e2, type: 2}
+  levelProgress: {fileID: 11400000, guid: c1776bd86a2ed144eb0d5748ff3dcac7, type: 2}
 --- !u!1 &912509282
 GameObject:
   m_ObjectHideFlags: 0
