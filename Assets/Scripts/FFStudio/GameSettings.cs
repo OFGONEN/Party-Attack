@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 namespace FFStudio
 {
@@ -13,8 +14,10 @@ namespace FFStudio
 		[Tooltip("Duration of the scaling for ui element")] public float uiEntityScaleTweenDuration;
 		[Tooltip("Duration of the movement for floating ui element")] public float uiFloatingEntityTweenDuration;
         [Tooltip("Percentage of the screen to register a swipe")] public int swipeThreshold;
-		
-        private static GameSettings instance;
+
+		[Foldout( "Camera Settings" )] public Vector3 camera_RotationVector;
+
+		private static GameSettings instance;
 
 		private delegate GameSettings ReturnGameSettings();
 		private static ReturnGameSettings returnInstance = LoadInstance;
