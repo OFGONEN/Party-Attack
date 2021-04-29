@@ -1,18 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 namespace FFStudio
 {
 	public class GameSettings : ScriptableObject
     {
-        #region Fields
-
+		[ System.Serializable ]
+		public class PlayerSettings
+		{
+			[ Min( 1.0f ) ]
+			public float startingHealth     = 100.0f;
+			public float healthDepleteSpeed = 0.5f;
+			public Color neutralizedColor   = Color.black, fullyDepletedColor = Color.gray, fullHealthColor = Color.red;
+		}
+		
+	#region Fields
         public int maxLevelCount;
         [Tooltip("Duration of the movement for ui element")] public float uiEntityMoveTweenDuration;
 		[Tooltip("Duration of the scaling for ui element")] public float uiEntityScaleTweenDuration;
 		[Tooltip("Duration of the movement for floating ui element")] public float uiFloatingEntityTweenDuration;
         [Tooltip("Percentage of the screen to register a swipe")] public int swipeThreshold;
+		
+		public PlayerSettings player;
 		
         private static GameSettings instance;
 
@@ -26,9 +37,9 @@ namespace FFStudio
 				return returnInstance();
 			}
 		}
-		#endregion
+	#endregion
 
-		#region Implementation
+	#region Implementation
 		static GameSettings LoadInstance()
 		{
 			if( instance == null )
@@ -43,6 +54,6 @@ namespace FFStudio
 		{
 			return instance;
 		}
-		#endregion
+	#endregion
 	}
 }
