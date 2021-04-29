@@ -1,5 +1,18 @@
 {
+  "scopedRegistries": [
+    {
+      "name": "Keijiro",
+      "url": "https://registry.npmjs.com",
+      "scopes": [
+        "jp.keijiro"
+      ]
+    }
+  ],
   "dependencies": {
+    "jp.keijiro.klak.math": "1.0.1",
+    "jp.keijiro.klak.motion": "1.0.1",
+    "jp.keijiro.neolowman": "1.0.0",
+    "jp.keijiro.test-assets": "1.0.1",
     "com.unity.2d.animation": "6.0.1",
     "com.unity.2d.pixel-perfect": "5.0.0",
     "com.unity.2d.psdimporter": "5.0.1",
