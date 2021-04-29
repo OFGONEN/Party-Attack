@@ -7,7 +7,6 @@ namespace FFStudio
 	public class GameSettings : ScriptableObject
     {
         #region Fields
-        public static GameSettings instance;
 
         public int maxLevelCount;
         [Tooltip("Duration of the movement for ui element")] public float uiEntityMoveTweenDuration;
@@ -15,26 +14,35 @@ namespace FFStudio
 		[Tooltip("Duration of the movement for floating ui element")] public float uiFloatingEntityTweenDuration;
         [Tooltip("Percentage of the screen to register a swipe")] public int swipeThreshold;
 		
+        private static GameSettings instance;
 
-        #endregion
+		private delegate GameSettings ReturnGameSettings();
+		private static ReturnGameSettings returnInstance = LoadInstance;
 
-        #region UnityAPI
-
-        private void Awake()
-        {
-            if(instance == null)
-            {
-				instance = this;
-                FFLogger.Log( "GameSettings instance is set" );
-            }
-            else if (instance != this)
-            {
-				Destroy( this );
-                FFLogger.Log( "New GameSettings Detected and Destroyed!" );
+		public static GameSettings Instance
+		{
+			get
+			{
+				return returnInstance();
 			}
 		}
-        #endregion
-        
+		#endregion
 
+		#region Implementation
+		static GameSettings LoadInstance()
+		{
+			if( instance == null )
+				instance = Resources.Load< GameSettings >( "GameSettings" );
+
+			returnInstance = ReturnInstance;
+
+			return instance;
+		}
+
+		static GameSettings ReturnInstance()
+		{
+			return instance;
+		}
+		#endregion
 	}
 }
