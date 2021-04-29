@@ -17,3 +17,9 @@ MonoBehaviour:
   uiEntityScaleTweenDuration: 0
   uiFloatingEntityTweenDuration: 0
   swipeThreshold: 0
+  human:
+    startingHealth: 100
+    neutralizedColor: {r: 0, g: 0, b: 0, a: 1}
+    fullyDepletedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    fullHealthColor: {r: 1, g: 0, b: 0, a: 1}
+    runDistance: 5000

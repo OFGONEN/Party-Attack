@@ -12,8 +12,8 @@ namespace FFStudio
 		{
 			[ Min( 1.0f ) ]
 			public float startingHealth     = 100.0f;
-			public float healthDepleteSpeed = 0.5f;
 			public Color neutralizedColor   = Color.black, fullyDepletedColor = Color.gray, fullHealthColor = Color.red;
+			public float runDistance		= 10.0f;
 		}
 		
 	#region Fields
@@ -23,7 +23,7 @@ namespace FFStudio
 		[Tooltip("Duration of the movement for floating ui element")] public float uiFloatingEntityTweenDuration;
         [Tooltip("Percentage of the screen to register a swipe")] public int swipeThreshold;
 		
-		public PlayerSettings player;
+		public PlayerSettings human;
 		
         private static GameSettings instance;
 

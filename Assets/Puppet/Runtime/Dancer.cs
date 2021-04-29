@@ -317,21 +317,26 @@ namespace Puppet
         }
 
         void Start()
-        {
-            _animator = GetComponent<Animator>();
+		{
+			_animator = GetComponent<Animator>();
 
-            // Random number/noise generators
-            _hash = new XXHash(_randomSeed);
-            _noise = _hash.Float2(-1000, 1000, 0);
+			// Random number/noise generators
+			_hash = new XXHash( _randomSeed );
+			_noise = _hash.Float2( -1000, 1000, 0 );
 
-            // Initial foot positions
-            var origin = SetY(transform.position, 0);
-            var foot = transform.right * _footDistance / 2;
-            _feet[0] = origin - foot;
-            _feet[1] = origin + foot;
-        }
+			// Initial foot positions
+			SetFeetPosition();
+		}
 
-        void Update()
+		public void SetFeetPosition()
+		{
+			var origin = SetY( transform.position, 0 );
+			var foot = transform.right * _footDistance / 2;
+			_feet[ 0 ] = origin - foot;
+			_feet[ 1 ] = origin + foot;
+		}
+
+		void Update()
         {
             // Noise update
             _noise.x += _noiseFrequency * Time.deltaTime;
