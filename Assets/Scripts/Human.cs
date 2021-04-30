@@ -16,7 +16,7 @@ public class Human : MonoBehaviour
 
 	public State CurrentState { get; private set; } = State.Dancing;
 
-	public bool SpawnedBefore { get; } = false;
+	public bool SpawnedBefore { get; private set; } = false;
 
 	private float Health
     {
@@ -30,6 +30,7 @@ public class Human : MonoBehaviour
 			OnHealthChange();
         }
 	}
+    [ ShowNonSerializedField, ReadOnly ]
 	private float health;
 
 	private float HealthRatio => Health / GameSettings.Instance.human.startingHealth;
@@ -37,6 +38,7 @@ public class Human : MonoBehaviour
 	private MaterialPropertyBlock materialPropertyBlock;
     private SkinnedMeshRenderer meshRenderer;
 	private Animator animator;
+	private RagdollToggler ragdoll;
 	static private int colorHash = Shader.PropertyToID( "_Color" );
     
 	private NavMeshAgent agent;
@@ -54,7 +56,7 @@ public class Human : MonoBehaviour
                agent.enabled = false;
             animator.enabled = true;
               dancer.enabled = true;
-			// TODO: ragdoll.enabled = false;
+			ragdoll.Toggle( false );
 
 			Health = GameSettings.Instance.human.startingHealth;
 
@@ -65,6 +67,7 @@ public class Human : MonoBehaviour
     private void OnDisable()
     {
 		CancelStartDancingUponReachingTargetTween();
+		SpawnedBefore = true;
 	}
     
     private void Start()
@@ -74,6 +77,7 @@ public class Human : MonoBehaviour
         agent                 = GetComponent< NavMeshAgent >();
         animator              = GetComponent< Animator >();
         dancer                = GetComponent< Puppet.Dancer >();
+		ragdoll               = GetComponent< RagdollToggler >();
         Health                = GameSettings.Instance.human.startingHealth;
         
 		OnHealthChange();
@@ -109,6 +113,7 @@ public class Human : MonoBehaviour
 
     private void RunFrom( Vector3 fromThisPosition )
     {
+		// TODO: Instead of disabling the animator, switch to "Run" animation.
 		animator.enabled = false;
 		  dancer.enabled = false;
 		   agent.enabled = true;
@@ -132,11 +137,10 @@ public class Human : MonoBehaviour
 
 	private void OnNeutralize()
 	{
-		// TODO: Instead of disabling the animator, switch to "Run" animation.
 		animator.enabled = false; 
           dancer.enabled = false;
            agent.enabled = false;
-		// TODO: ragdoll.enabled = true;
+		ragdoll.Toggle( true );
 		CurrentState = State.Neutralized_Ragdoll;
 		// TODO: ragdoll.enabled = false in X seconds via DOVirtual.DelayedCall.
 	}
