@@ -8,10 +8,5 @@ namespace FFStudio
 	{
 		public int stackSize;
 		public Stack< T > stack;
-
-		private void Awake()
-		{
-			stack = new Stack< T >( stackSize );
-		}
 	}
 }
