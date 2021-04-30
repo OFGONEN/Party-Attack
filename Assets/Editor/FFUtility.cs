@@ -16,22 +16,22 @@ namespace FFEditor
             EditorApplication.playModeStateChanged += PlayModeChange;
 
 			//Create GameSettings 
-			var path_GameSettings = Path.Combine( Application.dataPath, "ScriptableObjects", "GameSettings.asset" );
+			var path_GameSettings = Path.Combine( Application.dataPath, "Resources", "GameSettings.asset" );
 			if(!File.Exists(path_GameSettings))
             {
 				var gameSettings = ScriptableObject.CreateInstance< GameSettings >();
 
-				AssetDatabase.CreateAsset( gameSettings, "Assets/ScriptableObjects/GameSettings.asset" );
+				AssetDatabase.CreateAsset( gameSettings, "Assets/Resources/GameSettings.asset" );
 				Debug.Log( "GameSettings Created" );
 			}
 
 			//Create CurrentLevel
-			var path_CurrentLevel = Path.Combine( Application.dataPath, "ScriptableObjects", "CurrentLevel.asset" );
+			var path_CurrentLevel = Path.Combine( Application.dataPath, "Resources", "CurrentLevelData.asset" );
 			if(!File.Exists(path_CurrentLevel))
             {
 				var gameSettings = ScriptableObject.CreateInstance< CurrentLevelData >();
 
-				AssetDatabase.CreateAsset( gameSettings, "Assets/ScriptableObjects/CurrentLevel.asset" );
+				AssetDatabase.CreateAsset( gameSettings, "Assets/Resources/CurrentLevelData.asset" );
 				Debug.Log( "CurrentLevel Created" );
 			}
         }
