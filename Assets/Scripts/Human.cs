@@ -25,9 +25,9 @@ public class Human : MonoBehaviour
         {
 			if( CurrentState == State.Neutralized_Ragdoll || CurrentState == State.Neutralized_Stationary )
 				return;
-                
-            health = value; 
-            OnHealthChange();
+
+			health = Mathf.Max( 0, value );
+			OnHealthChange();
         }
 	}
 	private float health;
@@ -36,6 +36,7 @@ public class Human : MonoBehaviour
 
 	private MaterialPropertyBlock materialPropertyBlock;
     private SkinnedMeshRenderer meshRenderer;
+	private Animator animator;
 	static private int colorHash = Shader.PropertyToID( "_Color" );
     
 	private NavMeshAgent agent;
@@ -50,8 +51,9 @@ public class Human : MonoBehaviour
         if( SpawnedBefore )
         {
             // Revert back to defaults.
-            agent.enabled = false;
-			dancer.enabled = true;
+               agent.enabled = false;
+            animator.enabled = true;
+              dancer.enabled = true;
 			// TODO: ragdoll.enabled = false;
 
 			Health = GameSettings.Instance.human.startingHealth;
@@ -70,6 +72,7 @@ public class Human : MonoBehaviour
         materialPropertyBlock = new MaterialPropertyBlock();
         meshRenderer          = GetComponentInChildren< SkinnedMeshRenderer >();
         agent                 = GetComponent< NavMeshAgent >();
+        animator              = GetComponent< Animator >();
         dancer                = GetComponent< Puppet.Dancer >();
         Health                = GameSettings.Instance.human.startingHealth;
         
@@ -106,8 +109,9 @@ public class Human : MonoBehaviour
 
     private void RunFrom( Vector3 fromThisPosition )
     {
-		dancer.enabled = false;
-		agent.enabled  = true;
+		animator.enabled = false;
+		  dancer.enabled = false;
+		   agent.enabled = true;
         
 		var direction = ( transform.position - fromThisPosition );
         direction.Scale( new Vector3( 1, 0, 1 ) ); // Stay on XZ plane.
@@ -128,7 +132,10 @@ public class Human : MonoBehaviour
 
 	private void OnNeutralize()
 	{
-		dancer.enabled = agent.enabled = false;
+		// TODO: Instead of disabling the animator, switch to "Run" animation.
+		animator.enabled = false; 
+          dancer.enabled = false;
+           agent.enabled = false;
 		// TODO: ragdoll.enabled = true;
 		CurrentState = State.Neutralized_Ragdoll;
 		// TODO: ragdoll.enabled = false in X seconds via DOVirtual.DelayedCall.
@@ -140,8 +147,9 @@ public class Human : MonoBehaviour
                                             {
 												if( isActiveAndEnabled && agent.remainingDistance < agent.stoppingDistance )
                                                 {
-													agent.enabled = false;
-													dancer.enabled = true;
+													   agent.enabled = false;
+													animator.enabled = true;
+													  dancer.enabled = true;
 													dancer.SetFeetPosition();
 													CurrentState = State.Dancing;
                                                     
