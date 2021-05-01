@@ -37,9 +37,12 @@ public class Human : MonoBehaviour
 
 	private MaterialPropertyBlock materialPropertyBlock;
     private SkinnedMeshRenderer meshRenderer;
-	private Animator animator;
-	private RagdollToggler ragdoll;
 	static private int colorHash = Shader.PropertyToID( "_Color" );
+	
+	private Animator animator;
+	static private int isRunningHash = Animator.StringToHash( "IsRunning" );
+
+	private RagdollToggler ragdoll;
     
 	private NavMeshAgent agent;
 	private Puppet.Dancer dancer;
@@ -113,10 +116,9 @@ public class Human : MonoBehaviour
 
     private void RunFrom( Vector3 fromThisPosition )
     {
-		// TODO: Instead of disabling the animator, switch to "Run" animation.
-		animator.enabled = false;
-		  dancer.enabled = false;
-		   agent.enabled = true;
+		dancer.Pause();
+		animator.SetBool( isRunningHash, true );
+		agent.enabled = true;
         
 		var direction = ( transform.position - fromThisPosition );
         direction.Scale( new Vector3( 1, 0, 1 ) ); // Stay on XZ plane.
@@ -151,10 +153,9 @@ public class Human : MonoBehaviour
                                             {
 												if( isActiveAndEnabled && agent.remainingDistance < agent.stoppingDistance )
                                                 {
-													   agent.enabled = false;
-													animator.enabled = true;
-													  dancer.enabled = true;
-													dancer.SetFeetPosition();
+													agent.enabled = false;
+													animator.SetBool( isRunningHash, false );
+													dancer.Resume();
 													CurrentState = State.Dancing;
                                                     
 													startDancingUponReachingTargetTween.Kill();

@@ -30,6 +30,8 @@ namespace Puppet
         [SerializeField] float _noiseFrequency = 1.1f;
         [SerializeField] uint _randomSeed = 123;
 
+		private bool isPaused = false;
+
         #endregion
 
         #region Public accessor properties
@@ -328,16 +330,37 @@ namespace Puppet
 			SetFeetPosition();
 		}
 
-		public void SetFeetPosition()
+#region FFStudio Edits
+		private void SetFeetPosition()
 		{
 			var origin = SetY( transform.position, 0 );
 			var foot = transform.right * _footDistance / 2;
 			_feet[ 0 ] = origin - foot;
 			_feet[ 1 ] = origin + foot;
 		}
+        
+        public void Pause()
+        {
+			isPaused = true;
+		}
+        
+        public void Resume()
+        {
+            /* If the position of the character changes, we need to update feet position, as everything else is derived from feet position. */
+			SetFeetPosition();
+			isPaused = false;
+		}
+#endregion
 
 		void Update()
         {
+			/* FFStudio Edit: 
+             * Disabling this component to switch from dancing to let's say running, does not work:
+             * Character switches to a default pose and sinks halfway into the ground.
+             * However, not executing the body of Update() & OnAnimatorIK(), but keeping the component enabled seems to work. */
+			if( isPaused ) 
+                return;
+            
             // Noise update
             _noise.x += _noiseFrequency * Time.deltaTime;
 
@@ -395,6 +418,13 @@ namespace Puppet
 
         void OnAnimatorIK(int layerIndex)
         {
+			/* FFStudio Edit: 
+             * Disabling this component to switch from dancing to let's say running, does not work:
+             * Character switches to a default pose and sinks halfway into the ground.
+             * However, not executing the body of Update() & OnAnimatorIK(), but keeping the component enabled seems to work. */
+			if( isPaused )
+				return;
+            
             _animator.SetIKPosition(AvatarIKGoal.LeftFoot, LeftFootPosition);
             _animator.SetIKPosition(AvatarIKGoal.RightFoot, RightFootPosition);
             _animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
