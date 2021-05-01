@@ -17,7 +17,7 @@ public class FenceTrigger : MonoBehaviour
 			return;
 
 		/* Only times a Fence can trigger a Human is when the Human is running or dancing.
-	     * Hitting a Fence instantly Neutralizes a Human */
+	     * Hitting a Fence instantly Neutralizes a Human. */
 		if( human.CurrentState == Human.State.Running || human.CurrentState == Human.State.Dancing )
 			human.BecomeNeutralized( /* Apply hill jump force */ true );
 
