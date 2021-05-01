@@ -7,13 +7,25 @@ namespace FFStudio
 {
 	public class GameSettings : ScriptableObject
     {
-        #region Fields
-
+		[ System.Serializable ]
+		public class PlayerSettings
+		{
+			[ Min( 1.0f ) ]
+			public float startingHealth        = 100.0f;
+			public Color neutralizedColor      = Color.black, fullyDepletedColor = Color.gray, fullHealthColor = Color.red;
+			public float runVelocity           = 10.0f;
+			public float hillJumpForce_Dancing = 1.0f;
+			public float hillJumpForce_Running = 10.0f;
+		}
+		
+	#region Fields
         public int maxLevelCount;
         [Tooltip("Duration of the movement for ui element")] public float uiEntityMoveTweenDuration;
 		[Tooltip("Duration of the scaling for ui element")] public float uiEntityScaleTweenDuration;
 		[Tooltip("Duration of the movement for floating ui element")] public float uiFloatingEntityTweenDuration;
         [Tooltip("Percentage of the screen to register a swipe")] public int swipeThreshold;
+		
+		public PlayerSettings human;
 
 		[Foldout( "Camera Settings" )] public Vector3 camera_RotationVector;
 
@@ -29,9 +41,9 @@ namespace FFStudio
 				return returnInstance();
 			}
 		}
-		#endregion
+	#endregion
 
-		#region Implementation
+	#region Implementation
 		static GameSettings LoadInstance()
 		{
 			if( instance == null )
@@ -46,6 +58,6 @@ namespace FFStudio
 		{
 			return instance;
 		}
-		#endregion
+	#endregion
 	}
 }
