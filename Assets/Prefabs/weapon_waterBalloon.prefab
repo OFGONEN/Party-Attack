@@ -52,6 +52,7 @@ MonoBehaviour:
     gameEvents:
     - {fileID: 11400000, guid: 401725cae1b28774baafc7f0dcf0a64c, type: 2}
     - {fileID: 11400000, guid: d925a35b8e300aa4b93c5abe3a531a38, type: 2}
+    - {fileID: 11400000, guid: 6fa0680ab094f7f49b32b1cadad1727d, type: 2}
   shootOrigin: {fileID: 11400000, guid: 61ca28d8c463c6347a0cbd39530ac3b8, type: 2}
   projectileStack: {fileID: 11400000, guid: 542d66dadf007b64b8103ec12a395fdd, type: 2}
   fireRate: 0.15
