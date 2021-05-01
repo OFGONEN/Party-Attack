@@ -18,7 +18,7 @@ public class Human : MonoBehaviour
 
 	public bool SpawnedBefore { get; private set; } = false;
 
-	private float Health
+	public float Health
     {
 		get { return health; }
         set
@@ -30,6 +30,9 @@ public class Human : MonoBehaviour
 			OnHealthChange();
         }
 	}
+	
+/* Private Fields */
+	
     [ ShowNonSerializedField, ReadOnly ]
 	private float health;
 
@@ -47,7 +50,10 @@ public class Human : MonoBehaviour
 	private NavMeshAgent agent;
 	private Puppet.Dancer dancer;
     
-	private Tween startDancingUponReachingTargetTween;
+	private Tween switchToDancingUponReachingTargetTween;
+	private Vector3 runVelocity;
+	
+	private UnityMethod update;
 #endregion
 
 #region Unity API
@@ -65,11 +71,13 @@ public class Human : MonoBehaviour
 
 			CurrentState = State.Dancing;
 		}
+
+		update = ExtensionMethods.EmptyMethod;
 	}
     
     private void OnDisable()
     {
-		CancelStartDancingUponReachingTargetTween();
+		CancelSwitchToDancingUponReachingTargetTween();
 		SpawnedBefore = true;
 	}
     
@@ -84,21 +92,67 @@ public class Human : MonoBehaviour
         Health                = GameSettings.Instance.human.startingHealth;
 
 		RandomizeDancerProperties();
-
+		
 		OnHealthChange();
 	}
-    
-    private void OnTriggerEnter( Collider other )
-    {
-        //if( CurrentState == State.Running )
-			// TODO: Handle triggering the Fences.
-            
-        //if( CurrentState == State.Running || CurrentState == State.Dancing )
-			 // TODO: OFG: Handle projectiles.
+	
+	private void Update()
+	{
+		update();
 	}
+	
+	/* Since the child "Neo_Hips" GameObject has the trigger collider AND a Rigidbody, 
+	 * OnTriggerEnter is handled on FenceTrigger component of that GameObject. */
+	// private void OnTriggerEnter( Collider other )
+    // {
+	// }
 #endregion
 
 #region API
+	public void BecomeNeutralized( bool applyHillJumpForce = false )
+	{
+		CancelSwitchToDancingUponReachingTargetTween();
+		
+		update = ExtensionMethods.EmptyMethod;
+
+		animator.enabled = false;
+		dancer.enabled   = false;
+		agent.velocity   = Vector3.zero;
+		agent.enabled    = false;
+		   
+		ragdoll.Toggle( true );
+		if( applyHillJumpForce )
+			ApplyHillJumpingForce();
+
+		CurrentState = State.Neutralized_Ragdoll;
+		
+		// TODO: ragdoll.enabled = false in X seconds via DOVirtual.DelayedCall.
+	}
+
+	public void RunFrom( Vector3 fromThisPosition )
+	{
+		if( CurrentState != State.Dancing )
+			return;
+
+		dancer.Pause();
+		animator.SetBool( isRunningHash, true );
+		agent.enabled = true;
+
+		var direction = ( transform.position - fromThisPosition ).SetY( 0 ).normalized;
+		agent.velocity = runVelocity = direction * GameSettings.Instance.human.runVelocity;
+
+		update = Run; // Velocity needs to be applied every frame to NavMeshAgent, or it decelerates after a short duration.
+
+		CurrentState = State.Running;
+
+		SwitchToDancingUponReachingTargetTween();
+	}
+	
+	public void ApplyHillJumpingForce()
+	{
+		var force = CurrentState == State.Dancing ? GameSettings.Instance.human.hillJumpForce_Dancing : GameSettings.Instance.human.hillJumpForce_Running;
+		ragdoll.ApplyForce( transform.position.normalized * force );
+	}
 #endregion
 
 #region Implementation
@@ -116,60 +170,44 @@ public class Human : MonoBehaviour
 	}
 #endif
 
-    private void RunFrom( Vector3 fromThisPosition )
-    {
-		dancer.Pause();
-		animator.SetBool( isRunningHash, true );
-		agent.enabled = true;
-        
-		var direction = ( transform.position - fromThisPosition );
-        direction.Scale( new Vector3( 1, 0, 1 ) ); // Stay on XZ plane.
-		agent.SetDestination( transform.position + direction.normalized * GameSettings.Instance.human.runDistance );
-        
-		CurrentState = State.Running;
-        
-		StartDancingUponReachingTargetTween();
+	private	void Run()
+	{
+		agent.velocity = runVelocity;
 	}
 
-    private void OnHealthChange()
-    {
+	protected void SwitchToDancingUponReachingTargetTween()
+	{
+		NavMeshPath path = new NavMeshPath();
+		switchToDancingUponReachingTargetTween = DOVirtual.DelayedCall( /* Repeat every */ 0.5f /* seconds */, () =>
+												{
+													if( isActiveAndEnabled && agent.remainingDistance < agent.stoppingDistance )
+													{
+														agent.enabled = false;
+														animator.SetBool( isRunningHash, false );
+														dancer.Resume();
+
+														update = ExtensionMethods.EmptyMethod;
+
+														CurrentState = State.Dancing;
+
+														switchToDancingUponReachingTargetTween.Kill();
+														switchToDancingUponReachingTargetTween = null;
+													}
+												} ).SetLoops( -1 );
+	}
+	
+	protected void CancelSwitchToDancingUponReachingTargetTween()
+	{
+		switchToDancingUponReachingTargetTween.Kill();
+		switchToDancingUponReachingTargetTween = null;
+	}
+
+	private void OnHealthChange()
+	{
 		UpdateColor();
 
 		if( Health <= 0.0f )
-			OnNeutralize();
-    }
-
-	private void OnNeutralize()
-	{
-		animator.enabled = false; 
-          dancer.enabled = false;
-           agent.enabled = false;
-		ragdoll.Toggle( true );
-		CurrentState = State.Neutralized_Ragdoll;
-		// TODO: ragdoll.enabled = false in X seconds via DOVirtual.DelayedCall.
-	}
-
-	protected void StartDancingUponReachingTargetTween()
-	{
-		startDancingUponReachingTargetTween = DOVirtual.DelayedCall( /* Repeat every */ 0.5f /* seconds */, () =>
-                                            {
-												if( isActiveAndEnabled && agent.remainingDistance < agent.stoppingDistance )
-                                                {
-													agent.enabled = false;
-													animator.SetBool( isRunningHash, false );
-													dancer.Resume();
-													CurrentState = State.Dancing;
-                                                    
-													startDancingUponReachingTargetTween.Kill();
-                                                    startDancingUponReachingTargetTween = null;
-                                                }
-                                            } ).SetLoops( -1 );
-	}
-	
-	protected void CancelStartDancingUponReachingTargetTween()
-	{
-		startDancingUponReachingTargetTween.Kill();
-		startDancingUponReachingTargetTween = null;
+			BecomeNeutralized();
 	}
     
     private void UpdateColor()
@@ -186,7 +224,7 @@ public class Human : MonoBehaviour
 
 		return Color.Lerp( GameSettings.Instance.human.fullyDepletedColor, GameSettings.Instance.human.fullHealthColor, HealthRatio );
 	}
-
+	
 	private void RandomizeDancerProperties()
 	{
 		dancer.footDistance  *= Random.Range( 0.8f, 2.0f );

@@ -32,6 +32,12 @@ public class RagdollToggler : MonoBehaviour
         for( var i = 0; i < ragdollRigidbodies.Length; i++ )
 			ragdollRigidbodies[ i ].isKinematic = !activate;
     }
+    
+    public void ApplyForce( Vector3 force )
+    {
+		for( var i = 0; i < ragdollRigidbodies.Length; i++ )
+			ragdollRigidbodies[ i ].AddForce( force, ForceMode.VelocityChange );
+	}
 #endregion
 
 #region Implementation

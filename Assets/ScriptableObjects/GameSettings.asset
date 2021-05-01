@@ -22,4 +22,7 @@ MonoBehaviour:
     neutralizedColor: {r: 0, g: 0, b: 0, a: 1}
     fullyDepletedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     fullHealthColor: {r: 1, g: 0, b: 0, a: 1}
-    runDistance: 5000
+    runVelocity: 10
+    hillJumpForce_Dancing: 1
+    hillJumpForce_Running: 10
+  camera_RotationVector: {x: 0, y: 0, z: 0}

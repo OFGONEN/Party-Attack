@@ -17,4 +17,12 @@ MonoBehaviour:
   uiEntityScaleTweenDuration: 0.5
   uiFloatingEntityTweenDuration: 0
   swipeThreshold: 5
+  human:
+    startingHealth: 100
+    neutralizedColor: {r: 0, g: 0, b: 0, a: 1}
+    fullyDepletedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    fullHealthColor: {r: 1, g: 0, b: 0, a: 1}
+    runVelocity: 4
+    hillJumpForce_Dancing: 4
+    hillJumpForce_Running: 20
   camera_RotationVector: {x: 0, y: 0.75, z: 0}
