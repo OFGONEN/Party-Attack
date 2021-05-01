@@ -21,7 +21,7 @@ public abstract class Projectile : MonoBehaviour
 	#endregion
 
 	#region API
-	public void Shoot(Vector3 targetPosition )
+	public void Fire(Vector3 targetPosition )
 	{
 		var duration = Vector3.Distance( targetPosition, transform.position ) / GameSettings.Instance.projectile_Speed;
 
