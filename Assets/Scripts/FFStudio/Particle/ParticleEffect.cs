@@ -8,6 +8,7 @@ namespace FFStudio
 	{
 		#region Fields
 		[Header( "Fired Events" )]
+		public ParticleEffectStack particleStack;
 		public StringGameEvent particleStoppedEvent;
 		public string alias;
 		private ParticleSystem particles;
@@ -28,6 +29,11 @@ namespace FFStudio
 			particleStoppedEvent.eventValue = alias;
 
 			gameObject.SetActive( false );
+		}
+
+		private void OnDisable()
+		{
+			particleStack.stack.Push( this );
 		}
 
 		private void OnParticleSystemStopped()
