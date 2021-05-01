@@ -11,6 +11,7 @@ public class FartBombProjectile : Projectile
 		particleEvent.changePosition = true;
 		particleEvent.particleAlias = "Fart";
 		particleEvent.spawnPoint = transform.position;
+		particleEvent.Raise();
 
 		movementTween = null;
 

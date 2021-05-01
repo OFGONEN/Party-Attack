@@ -33,6 +33,7 @@ public class WaterBalloonProjectile : Projectile
 		particleEvent.changePosition = true;
 		particleEvent.particleAlias = "Water";
 		particleEvent.spawnPoint = transform.position;
+		particleEvent.Raise();
 
 		movementTween = null;
 

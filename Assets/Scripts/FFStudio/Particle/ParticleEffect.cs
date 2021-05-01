@@ -52,8 +52,6 @@ namespace FFStudio
 				transform.position = particleEvent.spawnPoint;
 
 			particles.Play();
-
-			FFLogger.Log( "Playing: " + alias + " active:" + gameObject.activeInHierarchy );
 		}
 		#endregion
 
