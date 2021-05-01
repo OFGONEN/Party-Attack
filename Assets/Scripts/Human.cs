@@ -14,6 +14,7 @@ public class Human : MonoBehaviour
         Dancing, Running, Neutralized_Ragdoll, Neutralized_Stationary
     }
 
+	[ field: SerializeField ]
 	public State CurrentState { get; private set; } = State.Dancing;
 
 	public bool SpawnedBefore { get; private set; } = false;
@@ -125,8 +126,17 @@ public class Human : MonoBehaviour
 			ApplyHillJumpingForce();
 
 		CurrentState = State.Neutralized_Ragdoll;
-		
-		// TODO: ragdoll.enabled = false in X seconds via DOVirtual.DelayedCall.
+
+		/* Turn ragdoll off after a pre-determined time passes, IF the character is still resting on Play Area (Y = 0). */
+		DOVirtual.DelayedCall( GameSettings.Instance.human.ragdollTurnoffTime,
+							   () =>
+								{
+									if( Mathf.Approximately( transform.position.y, 0 ) ) // Still on the Play Area.
+									{
+										ragdoll.Toggle( false );
+										CurrentState = State.Neutralized_Stationary;
+									}
+								} );
 	}
 
 	public void RunFrom( Vector3 fromThisPosition )
