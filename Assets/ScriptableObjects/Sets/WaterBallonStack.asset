@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad2dd02f6729e5a4ab85ebca3647208e, type: 3}
   m_Name: WaterBallonStack
   m_EditorClassIdentifier: 
-  stackSize: 500
+  stackSize: 50
   prefab: {fileID: -7576535714975677952, guid: 0e36dfaa7e8c2504bb06aeb076adbbc2, type: 3}

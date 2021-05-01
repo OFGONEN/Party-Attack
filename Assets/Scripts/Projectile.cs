@@ -16,7 +16,7 @@ public abstract class Projectile : MonoBehaviour
 	#region UnityAPI
 	protected virtual void OnDisable()
     {
-		projectileStack.Push( this );
+		projectileStack.stack.Push( this );
 	}
 	#endregion
 

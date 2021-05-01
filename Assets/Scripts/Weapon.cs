@@ -97,17 +97,22 @@ public class Weapon : MonoBehaviour
         for (int i = 0; i < projectileStack.stackSize; i++)
         {
 			var projectile = GameObject.Instantiate( projectileStack.prefab );
+			projectile.transform.SetParent( transform );
 			projectile.gameObject.SetActive( false );
 		}
 	}
 
 	Projectile GiveProjectile()
 	{
-		var projectile = projectileStack.Pop();
+		Projectile projectile;
 
-		if(projectile == null)
+		if(projectileStack.stack.Count > 0)
+			projectile = projectileStack.stack.Pop();
+		else 
 		{
 			projectile = GameObject.Instantiate( projectileStack.prefab );
+			projectile.transform.SetParent( transform );
+
 		}
 
 		projectile.gameObject.SetActive( true );
