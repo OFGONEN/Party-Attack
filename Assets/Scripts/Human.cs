@@ -82,7 +82,9 @@ public class Human : MonoBehaviour
         dancer                = GetComponent< Puppet.Dancer >();
 		ragdoll               = GetComponent< RagdollToggler >();
         Health                = GameSettings.Instance.human.startingHealth;
-        
+
+		RandomizeDancerProperties();
+
 		OnHealthChange();
 	}
     
@@ -183,6 +185,28 @@ public class Human : MonoBehaviour
 			return GameSettings.Instance.human.neutralizedColor;
 
 		return Color.Lerp( GameSettings.Instance.human.fullyDepletedColor, GameSettings.Instance.human.fullHealthColor, HealthRatio );
+	}
+
+	private void RandomizeDancerProperties()
+	{
+		dancer.footDistance  *= Random.Range( 0.8f, 2.0f );
+		dancer.stepFrequency *= Random.Range( 0.4f, 1.6f );
+		dancer.stepHeight    *= Random.Range( 0.75f, 1.25f );
+		dancer.stepAngle     *= Random.Range( 0.75f, 1.25f );
+
+		dancer.hipHeight        *= Random.Range( 0.75f, 1.25f );
+		dancer.hipPositionNoise *= Random.Range( 0.75f, 1.25f );
+		dancer.hipRotationNoise *= Random.Range( 0.75f, 1.25f );
+
+		dancer.spineBend           = Random.Range( 4.0f, -16.0f );
+		dancer.spineRotationNoise *= Random.Range( 0.75f, 1.25f );
+
+		dancer.handPositionNoise *= Random.Range( 0.5f, 2.0f );
+		dancer.handPosition      += Random.insideUnitSphere * 0.25f;
+
+		dancer.headMove       *= Random.Range( 0.2f, 2.8f );
+		dancer.noiseFrequency *= Random.Range( 0.4f, 1.8f );
+		dancer.randomSeed      = ( uint )Random.Range( 0, 0xffffff );
 	}
 #endregion
 }
