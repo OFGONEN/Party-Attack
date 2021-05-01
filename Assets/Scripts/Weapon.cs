@@ -3,42 +3,115 @@ using System.Collections.Generic;
 using UnityEngine;
 using FFStudio;
 
-public abstract class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
 	#region Fields
-    [Header ("Event Listeners")]
-	public EventListenerDelegateResponse activateWeapon;
-	public MultipleEventListenerDelegateResponse disActivateWeapon;
+	[Header( "Event Listeners" )]
+	public EventListenerDelegateResponse inputListener;
+	public EventListenerDelegateResponse activateWeaponListener;
+	public MultipleEventListenerDelegateResponse disActivateWeaponListener;
 
 	[Header( "Shooting" )]
 	public SharedReference shootOrigin;
-	public float coolDown;
+	public ProjectileStack projectileStack;
+	public float fireRate;
 
+
+	// Private Fields
+	private Camera mainCamera;
+	private float nextFire;
+	private Transform shooterTransform;
 	#endregion
 
 	#region UnityAPI
 	private void OnEnable()
     {
-		activateWeapon.OnEnable();
-		disActivateWeapon.OnEnable();
+		inputListener.OnEnable();
+		activateWeaponListener.OnEnable();
+		disActivateWeaponListener.OnEnable();
 	}
 
     private void OnDisable()
     {
-		activateWeapon.OnDisable();
-		disActivateWeapon.OnDisable();
+		inputListener.OnDisable();
+		activateWeaponListener.OnDisable();
+		disActivateWeaponListener.OnDisable();
 	}
 
     private void Awake()
     {
-		activateWeapon.response    = ActivateWeapon;
-		disActivateWeapon.response = DisActivateWeapon;
+		activateWeaponListener.response    = ActivateWeapon;
+		disActivateWeaponListener.response = DisActivateWeapon;
+		inputListener.response = ExtensionMethods.EmptyMethod;
+
+		mainCamera = Camera.main;
+
+		CreateProjectileStack();
+	}
+
+    private void Start()
+    {
+		shooterTransform = shootOrigin.sharedValue as Transform;
 	}
 	#endregion
 
 	#region Implementation
-	protected abstract void ActivateWeapon();
-	protected abstract void DisActivateWeapon();
-	protected abstract void Shoot();
+	void ActivateWeapon()
+    {
+		inputListener.response = Shoot;
+	}
+	void DisActivateWeapon()
+    {
+		inputListener.response = ExtensionMethods.EmptyMethod;
+	}
+	void Shoot()
+    {
+        if(Time.time < nextFire)
+			return;
+
+		RaycastHit hit;
+		Ray ray = mainCamera.ScreenPointToRay( Input.mousePosition );
+
+		if( Physics.Raycast( ray, out hit ) )
+		{
+			// get a projectile
+			var projectile = GiveProjectile();
+
+			// set position
+			projectile.transform.position = shooterTransform.position;
+
+			// set rotation
+			var lookRotation = Quaternion.LookRotation( hit.point - shooterTransform.position );
+			projectile.transform.rotation = lookRotation;
+
+			projectile.Fire( hit.point );
+
+			nextFire = Time.time + fireRate;
+		}
+	}
+
+    void CreateProjectileStack()
+    {
+		projectileStack.stack = new Stack<Projectile>( projectileStack.stackSize );
+
+        for (int i = 0; i < projectileStack.stackSize; i++)
+        {
+			var projectile = GameObject.Instantiate( projectileStack.prefab );
+			projectile.gameObject.SetActive( false );
+		}
+	}
+
+	Projectile GiveProjectile()
+	{
+		var projectile = projectileStack.Pop();
+
+		if(projectile == null)
+		{
+			projectile = GameObject.Instantiate( projectileStack.prefab );
+		}
+
+		projectile.gameObject.SetActive( true );
+		return projectile;
+	}
 	#endregion
 }
