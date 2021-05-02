@@ -445,6 +445,7 @@ MonoBehaviour:
     gameEvent: {fileID: 11400000, guid: 0429c0cc661679842a5f69772d947481, type: 2}
   particleEffectStacks:
   - {fileID: 11400000, guid: 9338fafb11d8d174fab4d1f98f45cb09, type: 2}
+  - {fileID: 11400000, guid: e4eeab7939acd514789688e7059cd822, type: 2}
 --- !u!1 &912509282
 GameObject:
   m_ObjectHideFlags: 0
