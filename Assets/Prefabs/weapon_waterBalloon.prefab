@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &142929690704726016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 142929690704726017}
+  - component: {fileID: -506332360113205582}
+  m_Layer: 0
+  m_Name: weapon_waterBalloon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &142929690704726017
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142929690704726016}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-506332360113205582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142929690704726016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 638a1706f1f8f10408a60e65195b22f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputListener:
+    gameEvent: {fileID: 11400000, guid: eddc3259425f9954ca67af636169abda, type: 2}
+  activateWeaponListener:
+    gameEvent: {fileID: 11400000, guid: f68bdf4c0f69cc6468fce841aef7a9de, type: 2}
+  disActivateWeaponListener:
+    gameEvent: {fileID: 0}
+    gameEvents:
+    - {fileID: 11400000, guid: 401725cae1b28774baafc7f0dcf0a64c, type: 2}
+    - {fileID: 11400000, guid: d925a35b8e300aa4b93c5abe3a531a38, type: 2}
+    - {fileID: 11400000, guid: 6fa0680ab094f7f49b32b1cadad1727d, type: 2}
+  shootOrigin: {fileID: 11400000, guid: 61ca28d8c463c6347a0cbd39530ac3b8, type: 2}
+  projectileStack: {fileID: 11400000, guid: 542d66dadf007b64b8103ec12a395fdd, type: 2}
+  fireRate: 0.15

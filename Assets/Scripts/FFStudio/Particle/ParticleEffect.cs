@@ -8,6 +8,7 @@ namespace FFStudio
 	{
 		#region Fields
 		[Header( "Fired Events" )]
+		public ParticleEffectStack particleStack;
 		public StringGameEvent particleStoppedEvent;
 		public string alias;
 		private ParticleSystem particles;
@@ -30,6 +31,11 @@ namespace FFStudio
 			gameObject.SetActive( false );
 		}
 
+		private void OnDisable()
+		{
+			particleStack.stack.Push( this );
+		}
+
 		private void OnParticleSystemStopped()
 		{
 			gameObject.SetActive( false );
@@ -46,8 +52,6 @@ namespace FFStudio
 				transform.position = particleEvent.spawnPoint;
 
 			particles.Play();
-
-			FFLogger.Log( "Playing: " + alias + " active:" + gameObject.activeInHierarchy );
 		}
 		#endregion
 

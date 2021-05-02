@@ -10,9 +10,9 @@ namespace FFStudio
 		#region Fields
 		[Header( "Event Listeners" )]
 		public EventListenerDelegateResponse spawnParticleListener;
+		public ParticleEffectStack[] particleEffectStacks;
 
-		[SerializeField] private ParticleEffect[] particleEffects;
-		private Dictionary<string, ParticleEffect> particleEffectDictionary;
+		private Dictionary<string, ParticleEffectStack> particleStackDictionary;
 		#endregion
 
 		#region UnityAPI
@@ -31,14 +31,21 @@ namespace FFStudio
 		{
 			spawnParticleListener.response = SpawnParticle;
 
-			particleEffectDictionary = new Dictionary<string, ParticleEffect>( particleEffects.Length );
+			particleStackDictionary = new Dictionary<string, ParticleEffectStack>( particleEffectStacks.Length );
 
-			for( int i = 0; i < particleEffects.Length; i++ )
+			for (int i = 0; i < particleEffectStacks.Length; i++)
 			{
-				particleEffectDictionary.Add( particleEffects[ i ].alias, particleEffects[ i ] );
+				var particleStack = particleEffectStacks[ i ];
+				particleStack.stack = new Stack<ParticleEffect>( particleStack.stackSize );
+
+				for( int x = 0; x < particleStack.stackSize; x++ )
+				{
+					var effect = GameObject.Instantiate( particleStack.prefab );
+					effect.transform.SetParent( transform );
+				}
+
+				particleStackDictionary.Add( particleStack.prefab.alias, particleStack );
 			}
-
-
 		}
 		#endregion
 
@@ -48,16 +55,35 @@ namespace FFStudio
 		{
 			var spawnEvent = spawnParticleListener.gameEvent as ParticleSpawnEvent;
 
-			ParticleEffect effect;
+			ParticleEffectStack particleStack = null;
 
-			if( !particleEffectDictionary.TryGetValue( spawnEvent.particleAlias, out effect ) )
+			if( !particleStackDictionary.TryGetValue( spawnEvent.particleAlias, out particleStack ) )
 			{
 				FFLogger.Log( "Particle:" + spawnEvent.particleAlias + " is missing!" );
 				return;
 			}
 
-			effect.PlayParticle( spawnEvent );
+			var particleEffect = GiveParticle( particleStack );
+			particleEffect.PlayParticle( spawnEvent );
 		}
+
+		ParticleEffect GiveParticle(ParticleEffectStack effectStack)
+		{
+			ParticleEffect particle;
+
+			if( effectStack.stack.Count > -1 )
+				particle = effectStack.stack.Pop();
+			else
+			{
+				particle = GameObject.Instantiate( effectStack.prefab );
+				particle.transform.SetParent( transform );
+
+			}
+
+			return particle;
+		}
+
+
 		#endregion
 	}
 }
