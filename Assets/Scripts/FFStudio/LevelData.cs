@@ -11,5 +11,10 @@ namespace FFStudio
         [Scene()]
 		public int sceneIndex;
 		public bool isGroundLevel = true;
+		public int humanCount;
+
+		public GameObject cameraPrefab;
+		public Material skyboxMaterial;
+
 	}
 }
