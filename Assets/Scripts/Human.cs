@@ -8,8 +8,10 @@ using DG.Tweening;
 
 public class Human : MonoBehaviour
 {
-#region Fields
-    public enum State
+	#region Fields
+	[Header ("Fired Events")]
+	public GameEvent humanNeutralized;
+	public enum State
     {
         Dancing, Running, Neutralized_Ragdoll, Neutralized_Stationary
     }
@@ -122,6 +124,8 @@ public class Human : MonoBehaviour
 			transform.position = transform.position.SetY( 0 );
 
 		CurrentState = State.Neutralized_Ragdoll;
+
+		humanNeutralized.Raise();
 
 		/* Turn ragdoll off after a pre-determined time passes, IF the character is still resting on Play Area (Y = 0). */
 		DOVirtual.DelayedCall( GameSettings.Instance.human.ragdollTurnoffTime,

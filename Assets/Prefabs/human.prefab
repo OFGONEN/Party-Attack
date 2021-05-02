@@ -562,6 +562,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e252b46aa3f49e439944d23f5d0242a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  humanNeutralized: {fileID: 11400000, guid: b9e2c8a1b4dc1ef408739116148006a2, type: 2}
+  <CurrentState>k__BackingField: 0
 --- !u!95 &5638070540759588643
 Animator:
   serializedVersion: 3
