@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6cbbcd610c23aa4c883f06c0505bba5, type: 3}
-  m_Name: human_health
+  m_Name: level_loading_progress
   m_EditorClassIdentifier: 
-  sharedValue: 100
+  sharedValue: 0
