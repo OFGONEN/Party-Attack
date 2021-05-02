@@ -32,7 +32,8 @@ namespace FFStudio
 		[Foldout( "Camera Settings" )] public Vector3 camera_RotationVector;
 
 		[Foldout( "Projectile Settings" )] public float projectile_Speed = 20f;
-		[Foldout( "Projectile Settings" )] public float projectile_fart_radius = 20f;
+		[Foldout( "Projectile Settings" )] public float projectile_fart_radius = 1f;
+		[Foldout( "Projectile Settings" )] public float projectile_fart_delay = 1f;
 		[Foldout( "Projectile Settings" ) ] public int projectile_target_triggerLayer; // Target == Human
 
 		private static GameSettings instance;

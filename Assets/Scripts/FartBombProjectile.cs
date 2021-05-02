@@ -20,7 +20,7 @@ public class FartBombProjectile : Projectile
 
 		var hits = Physics.OverlapSphere( transform.position, GameSettings.Instance.projectile_fart_radius, 1 << GameSettings.Instance.projectile_target_triggerLayer /* Human Layer Mask */);
 
-		DOVirtual.DelayedCall( 1, () => MakeHumansRun( hits ) );
+		DOVirtual.DelayedCall( GameSettings.Instance.projectile_fart_delay, () => MakeHumansRun( hits ) );
 	}
 
 	void MakeHumansRun( Collider[] hits )
