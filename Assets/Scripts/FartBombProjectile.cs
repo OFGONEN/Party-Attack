@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FFStudio;
+using DG.Tweening;
 
 public class FartBombProjectile : Projectile
 {
@@ -17,14 +18,24 @@ public class FartBombProjectile : Projectile
 
 		gameObject.SetActive( false );
 
-		var hits = Physics.OverlapSphere( transform.position, GameSettings.Instance.projectile_fart_radius, GameSettings.Instance.projectile_triggerLayer /* Human Layer Mask */);
+		var hits = Physics.OverlapSphere( transform.position, GameSettings.Instance.projectile_fart_radius, 1 << GameSettings.Instance.projectile_target_triggerLayer /* Human Layer Mask */);
 
-        foreach ( var hit in hits )
+		DOVirtual.DelayedCall( 1, () => MakeHumansRun( hits ) );
+	}
+
+	void MakeHumansRun( Collider[] hits )
+	{
+		foreach ( var hit in hits )
         {
-			// var human = hit.GetComponent<Human>();
-			// human.doDamage();
-			// human.dorun();
+			var human = hit.GetComponentInParent<Human>();
+			human.Health -= damage;
+			human.RunFrom( transform.position );
 		}
 	}
 	#endregion
+
+	private void OnDrawGizmos()
+	{
+		Gizmos.DrawSphere( transform.position, GameSettings.Instance.projectile_fart_radius );
+	}
 }

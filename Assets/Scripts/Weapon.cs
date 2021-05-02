@@ -44,7 +44,6 @@ public class Weapon : MonoBehaviour
 		disActivateWeaponListener.response = DisActivateWeapon;
 		inputListener.response = ExtensionMethods.EmptyMethod;
 
-		mainCamera = Camera.main;
 
 		CreateProjectileStack();
 	}
@@ -52,6 +51,7 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
 		shooterTransform = shootOrigin.sharedValue as Transform;
+		mainCamera = Camera.main;
 	}
 	#endregion
 
