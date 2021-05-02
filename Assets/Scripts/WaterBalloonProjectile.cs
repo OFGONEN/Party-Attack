@@ -6,7 +6,11 @@ using DG.Tweening;
 
 public class WaterBalloonProjectile : Projectile
 {
-    #region UnityAPI
+	#region Fields
+	public float damage;
+	#endregion
+
+	#region UnityAPI
 	private void Awake()
 	{
 		gameObject.layer = GameSettings.Instance.projectile_triggerLayer;
@@ -19,8 +23,8 @@ public class WaterBalloonProjectile : Projectile
 		    movementTween.Kill();
 		}
 
-		//var human = other.GetComponent<Human>();
-		// human.DoDamage();
+		var human = other.GetComponentInParent< Human >();
+		human.Health -= damage;
 
 		TargetReached();
 	}

@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3423116360326154051}
   - component: {fileID: 5667458320121963285}
   - component: {fileID: -7576535714975677952}
-  m_Layer: 0
+  - component: {fileID: 1239562229946832961}
+  m_Layer: 6
   m_Name: projectile_waterBalloon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,3 +98,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileStack: {fileID: 11400000, guid: 542d66dadf007b64b8103ec12a395fdd, type: 2}
   particleEvent: {fileID: 11400000, guid: 0429c0cc661679842a5f69772d947481, type: 2}
+  damage: 10
+--- !u!135 &1239562229946832961
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3737728438353126815}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.0011952819
+  m_Center: {x: 0.0000088119505, y: 0.000013218373, z: 0.00009821519}
