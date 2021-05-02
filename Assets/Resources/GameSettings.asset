@@ -22,10 +22,9 @@ MonoBehaviour:
     neutralizedColor: {r: 0, g: 0, b: 0, a: 1}
     fullyDepletedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     fullHealthColor: {r: 1, g: 0.33333334, b: 0.33333334, a: 1}
-    runVelocity: 3
-    hillJumpForce_Dancing: 2
-    hillJumpForce_Running: 5
-    ragdollTurnoffTime: 3
+    runDistance: 3
+    hillJumpForce: 5
+    ragdollTurnoffTime: 4
   camera_RotationVector: {x: 0, y: 0.25, z: 0}
   projectile_Speed: 20
   projectile_fart_radius: 2

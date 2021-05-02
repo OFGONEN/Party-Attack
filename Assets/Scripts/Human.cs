@@ -52,9 +52,8 @@ public class Human : MonoBehaviour
 	private Puppet.Dancer dancer;
     
 	private Tween switchToDancingUponReachingTargetTween;
-	private Vector3 runVelocity;
-	
-	private UnityMethod update;
+	private bool willJump = false;
+	private bool jumpIsAllowed = false;
 #endregion
 
 #region Unity API
@@ -68,12 +67,12 @@ public class Human : MonoBehaviour
               dancer.enabled = true;
 			ragdoll.Toggle( false );
 
+			willJump = false;
+
 			Health = GameSettings.Instance.human.startingHealth;
 
 			CurrentState = State.Dancing;
 		}
-
-		update = ExtensionMethods.EmptyMethod;
 	}
     
     private void OnDisable()
@@ -95,11 +94,8 @@ public class Human : MonoBehaviour
 		RandomizeDancerProperties();
 		
 		OnHealthChange();
-	}
-	
-	private void Update()
-	{
-		update();
+
+		jumpIsAllowed = !CurrentLevelData.Instance.levelData.isGroundLevel;
 	}
 	
 	/* Since the child "Neo_Hips" GameObject has the trigger collider AND a Rigidbody, 
@@ -114,16 +110,16 @@ public class Human : MonoBehaviour
 	{
 		CancelSwitchToDancingUponReachingTargetTween();
 		
-		update = ExtensionMethods.EmptyMethod;
-
 		animator.enabled = false;
 		dancer.enabled   = false;
-		agent.velocity   = Vector3.zero;
 		agent.enabled    = false;
 		   
 		ragdoll.Toggle( true );
+		
 		if( applyHillJumpForce )
 			ApplyHillJumpingForce();
+		else // Make sure body is on Y = 0, so it can be set to stationary after X seconds.
+			transform.position = transform.position.SetY( 0 );
 
 		CurrentState = State.Neutralized_Ragdoll;
 
@@ -149,9 +145,29 @@ public class Human : MonoBehaviour
 		agent.enabled = true;
 
 		var direction = ( transform.position - fromThisPosition ).SetY( 0 ).normalized;
-		agent.velocity = runVelocity = direction * GameSettings.Instance.human.runVelocity;
+		var destination = transform.position + direction * GameSettings.Instance.human.runDistance;
 
-		update = Run; // Velocity needs to be applied every frame to NavMeshAgent, or it decelerates after a short duration.
+		if( jumpIsAllowed )
+		{
+			NavMeshHit hitInfo;
+			bool aBoundaryIsHit = agent.Raycast( destination, out hitInfo );
+			if( aBoundaryIsHit && hitInfo.mask == 0 /* Meaning the boundary hit is the outermost one. */ )
+			{
+				/* Means the destination is outside the NavMesh. Agent should go until it hits the border and then jump.
+				* Readjust destination to reachable spot. */
+				destination = transform.position + direction * hitInfo.distance;
+
+				/* There might also be obsctructing geometry in our way, we don't want to jump in that case. */
+				RaycastHit raycastHitInfo;
+				if( Physics.SphereCast( transform.position, agent.radius * 1.5f, direction, out raycastHitInfo, Mathf.Infinity, 1 << 10 ) )
+					// There IS obstructing geometry in our way. Still going to run, but will stop a little before the obstruction.
+					destination = transform.position + direction * ( raycastHitInfo.distance - 0.3f );
+				else
+					willJump = true;
+			}
+		}
+		
+		agent.SetDestination( destination );
 
 		CurrentState = State.Running;
 
@@ -160,50 +176,49 @@ public class Human : MonoBehaviour
 	
 	public void ApplyHillJumpingForce()
 	{
-		var force = CurrentState == State.Dancing ? GameSettings.Instance.human.hillJumpForce_Dancing : GameSettings.Instance.human.hillJumpForce_Running;
-		ragdoll.ApplyForce( transform.position.normalized * force );
+		ragdoll.ApplyForce( transform.position.normalized * GameSettings.Instance.human.hillJumpForce );
 	}
 #endregion
 
 #region Implementation
 #if UNITY_EDITOR
     [ Button( "[TEST] Apply 30 Damage" ) ]
-    private void Apply_10_Damage()
+    private void Apply_30_Damage()
     {
 		Health -= 30;
 	}
     
-    [ Button( "[TEST] Run From <1,0,0>" ) ]
-    private void RunFromVector3Right()
+	[ Button( "[TEST] Run From <0,0,0>" ) ]
+    private void RunFromOrigin()
     {
-		RunFrom( Vector3.right );
+		RunFrom( Vector3.zero );
 	}
 #endif
-
-	private	void Run()
-	{
-		agent.velocity = runVelocity;
-	}
 
 	protected void SwitchToDancingUponReachingTargetTween()
 	{
 		NavMeshPath path = new NavMeshPath();
-		switchToDancingUponReachingTargetTween = DOVirtual.DelayedCall( /* Repeat every */ 0.5f /* seconds */, () =>
-												{
-													if( isActiveAndEnabled && agent.remainingDistance < agent.stoppingDistance )
-													{
-														agent.enabled = false;
-														animator.SetBool( isRunningHash, false );
-														dancer.Resume();
+		
+		switchToDancingUponReachingTargetTween = 
+			DOVirtual.DelayedCall( /* Repeat every */ 0.25f /* seconds */, () =>
+			{
+				if( isActiveAndEnabled && agent.remainingDistance < agent.stoppingDistance )
+				{
+					CancelSwitchToDancingUponReachingTargetTween();
 
-														update = ExtensionMethods.EmptyMethod;
+					if( willJump )
+						BecomeNeutralized( /* Apply hill jump force */ true );
+					else 
+					{
+						agent.enabled = false;
 
-														CurrentState = State.Dancing;
+						animator.SetBool( isRunningHash, false );
+						dancer.Resume();
 
-														switchToDancingUponReachingTargetTween.Kill();
-														switchToDancingUponReachingTargetTween = null;
-													}
-												} ).SetLoops( -1 );
+						CurrentState = State.Dancing;
+					}
+				}
+			} ).SetLoops( -1 );
 	}
 	
 	protected void CancelSwitchToDancingUponReachingTargetTween()

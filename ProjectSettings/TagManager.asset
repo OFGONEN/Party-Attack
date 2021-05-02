@@ -15,9 +15,9 @@ TagManager:
   - Projectile
   - Net
   - Fence
-  - 
-  - 
-  - 
+  - Navigation
+  - Obstruction
+  - Raycast-Only
   - 
   - 
   - 

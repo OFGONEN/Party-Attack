@@ -10,5 +10,6 @@ namespace FFStudio
     {
         [Scene()]
 		public int sceneIndex;
-    }
+		public bool isGroundLevel = true;
+	}
 }

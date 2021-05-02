@@ -11,13 +11,12 @@ namespace FFStudio
 		public class PlayerSettings
 		{
 			[ Min( 1.0f ) ]
-			public float startingHealth        = 100.0f;
-			public Color neutralizedColor      = Color.black, fullyDepletedColor = Color.gray, fullHealthColor = Color.red;
-			public float runVelocity           = 10.0f;
-			public float hillJumpForce_Dancing = 1.0f;
-			public float hillJumpForce_Running = 10.0f;
+			public float startingHealth   = 100.0f;
+			public Color neutralizedColor = Color.black, fullyDepletedColor = Color.gray, fullHealthColor = Color.red;
+			public float runDistance      = 10.0f;
+			public float hillJumpForce    = 10.0f;
 			[ Range( 0.1f, 5.0f ) ]
-			public float ragdollTurnoffTime	   = 3.0f;
+			public float ragdollTurnoffTime = 3.0f;
 		}
 		
 	#region Fields
