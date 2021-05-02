@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FFStudio;
+using DG.Tweening;
 
 public class FartBombProjectile : Projectile
 {
@@ -19,7 +20,11 @@ public class FartBombProjectile : Projectile
 
 		var hits = Physics.OverlapSphere( transform.position, GameSettings.Instance.projectile_fart_radius, 1 << GameSettings.Instance.projectile_target_triggerLayer /* Human Layer Mask */);
 
+		DOVirtual.DelayedCall( 1, () => MakeHumansRun( hits ) );
+	}
 
+	void MakeHumansRun( Collider[] hits )
+	{
 		foreach ( var hit in hits )
         {
 			var human = hit.GetComponentInParent<Human>();
