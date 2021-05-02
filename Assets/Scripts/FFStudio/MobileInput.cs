@@ -11,6 +11,7 @@ namespace FFStudio
 		public SwipeInputEvent swipeInputEvent;
 		public IntGameEvent tapInputEvent;
 		public GameEvent fingerUpdate;
+		public GameEvent fingerDown;
 		int swipeThreshold;
 		private void Awake()
 		{
@@ -30,6 +31,11 @@ namespace FFStudio
 		public void FingerUpdate()
 		{
 			fingerUpdate.Raise();
+		}
+
+		public void FingerDown()
+		{
+			fingerDown.Raise();
 		}
     }
 }
