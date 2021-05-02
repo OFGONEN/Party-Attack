@@ -33,7 +33,7 @@ namespace FFStudio
 
 		[Foldout( "Projectile Settings" )] public float projectile_Speed = 20f;
 		[Foldout( "Projectile Settings" )] public float projectile_fart_radius = 20f;
-		[Foldout( "Projectile Settings" ) ] public int projectile_triggerLayer;
+		[Foldout( "Projectile Settings" ) ] public int projectile_target_triggerLayer; // Target == Human
 
 		private static GameSettings instance;
 

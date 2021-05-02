@@ -805,8 +805,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594277344}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7181854, y: -0.16814685, z: 6.5386596}
+  m_LocalRotation: {x: -0, y: 0.43688512, z: -0, w: 0.8995173}
+  m_LocalPosition: {x: 0.14, y: -0.16814685, z: -1.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4666124148332839}
@@ -814,7 +814,7 @@ Transform:
   - {fileID: 4855044311324093}
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 51.811, z: 0}
 --- !u!114 &1594277346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1006,6 +1006,63 @@ MonoBehaviour:
   onWorld:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1001 &1683017165
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2662175393516496976, guid: 512fead4776f96944bd25da15658ab1c, type: 3}
+      propertyPath: m_Name
+      value: weapon_fartBomb
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662175393516496979, guid: 512fead4776f96944bd25da15658ab1c, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662175393516496979, guid: 512fead4776f96944bd25da15658ab1c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662175393516496979, guid: 512fead4776f96944bd25da15658ab1c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662175393516496979, guid: 512fead4776f96944bd25da15658ab1c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662175393516496979, guid: 512fead4776f96944bd25da15658ab1c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662175393516496979, guid: 512fead4776f96944bd25da15658ab1c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662175393516496979, guid: 512fead4776f96944bd25da15658ab1c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662175393516496979, guid: 512fead4776f96944bd25da15658ab1c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662175393516496979, guid: 512fead4776f96944bd25da15658ab1c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662175393516496979, guid: 512fead4776f96944bd25da15658ab1c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2662175393516496979, guid: 512fead4776f96944bd25da15658ab1c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 512fead4776f96944bd25da15658ab1c, type: 3}
 --- !u!1 &1775916354
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,7 +1668,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 13
   m_Depth: 1
   m_CullingMask:

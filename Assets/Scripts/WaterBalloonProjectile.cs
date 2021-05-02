@@ -7,15 +7,9 @@ using DG.Tweening;
 public class WaterBalloonProjectile : Projectile
 {
 	#region Fields
-	public float damage;
 	#endregion
 
 	#region UnityAPI
-	private void Awake()
-	{
-		gameObject.layer = GameSettings.Instance.projectile_triggerLayer;
-	}
-
     private void OnTriggerEnter( Collider other )
     {
         if(movementTween != null)

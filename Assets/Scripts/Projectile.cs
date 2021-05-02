@@ -10,6 +10,8 @@ public abstract class Projectile : MonoBehaviour
 	public ProjectileStack projectileStack;
 	public ParticleSpawnEvent particleEvent;
 
+	public float damage;
+
 	protected Tween movementTween;
 	#endregion
 

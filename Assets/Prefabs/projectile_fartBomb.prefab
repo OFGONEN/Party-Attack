@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8965942519573819845}
   - component: {fileID: 6595972995784918287}
   - component: {fileID: 5496660799742466441}
-  m_Layer: 0
-  m_Name: fartbomb
+  m_Layer: 6
+  m_Name: projectile_fartBomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,3 +97,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileStack: {fileID: 11400000, guid: 27e2c4863abc1e048888d31d95f1b904, type: 2}
   particleEvent: {fileID: 11400000, guid: 0429c0cc661679842a5f69772d947481, type: 2}
+  damage: 50
