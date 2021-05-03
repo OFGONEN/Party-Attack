@@ -14,7 +14,7 @@ public class FartBombProjectile : Projectile
 		particleEvent.spawnPoint = transform.position;
 		particleEvent.Raise();
 
-		movementTween = null;
+		// movementTween = null;
 
 		gameObject.SetActive( false );
 

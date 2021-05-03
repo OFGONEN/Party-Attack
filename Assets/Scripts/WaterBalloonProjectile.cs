@@ -12,9 +12,10 @@ public class WaterBalloonProjectile : Projectile
 	#region UnityAPI
     private void OnTriggerEnter( Collider other )
     {
-        if(movementTween != null)
-        {
-		    movementTween.Kill();
+		for (int i = 0; i < movementTween.Length; i++)
+		{
+			if( movementTween[i] != null )
+				movementTween[ i ].Kill();
 		}
 
 		var human = other.GetComponentInParent< Human >();
@@ -33,7 +34,7 @@ public class WaterBalloonProjectile : Projectile
 		particleEvent.spawnPoint = transform.position;
 		particleEvent.Raise();
 
-		movementTween = null;
+		// movementTween = null;
 
 		gameObject.SetActive( false );
 	}

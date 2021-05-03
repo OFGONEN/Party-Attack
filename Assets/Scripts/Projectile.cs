@@ -12,7 +12,7 @@ public abstract class Projectile : MonoBehaviour
 
 	public float damage;
 
-	protected Tween movementTween;
+	protected Tween[] movementTween = new Tween[3];
 	#endregion
 
 	#region UnityAPI
@@ -27,13 +27,11 @@ public abstract class Projectile : MonoBehaviour
 	{
 		var duration = Vector3.Distance( targetPosition, transform.position ) / GameSettings.Instance.projectile_Speed;
 
-		var tween = transform.DOMoveX( targetPosition.x, duration ).SetEase( Ease.Linear );
-		transform.DOMoveZ( targetPosition.z, duration ).SetEase( Ease.Linear );
-		transform.DOMoveY( targetPosition.y, duration ).SetEase( Ease.InQuad );
+		movementTween[0] = transform.DOMoveX( targetPosition.x, duration ).SetEase( Ease.Linear );
+		movementTween[1] = transform.DOMoveZ( targetPosition.z, duration ).SetEase( Ease.Linear );
+		movementTween[2] = transform.DOMoveY( targetPosition.y, duration ).SetEase( Ease.InQuad );
 
-		tween.OnComplete( TargetReached );
-
-		movementTween = tween;
+		movementTween[2].OnComplete( TargetReached );
 	}
     #endregion
 
