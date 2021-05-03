@@ -11,15 +11,17 @@ public class Weapon : MonoBehaviour
 	public EventListenerDelegateResponse activateWeaponListener;
 	public MultipleEventListenerDelegateResponse disActivateWeaponListener;
 
+
 	[Header( "Shooting" )]
-	public SharedReference shootOrigin;
+	public SharedReferenceProperty shootOriginReferance;
+	public SharedReferenceProperty mainCameraReferance;
 	public ProjectileStack projectileStack;
 	public float fireRate;
 
 
 	// Private Fields
-	private Camera mainCamera;
 	private float nextFire;
+	private Camera mainCamera;
 	private Transform shooterTransform;
 	#endregion
 
@@ -44,14 +46,10 @@ public class Weapon : MonoBehaviour
 		disActivateWeaponListener.response = DisActivateWeapon;
 		inputListener.response = ExtensionMethods.EmptyMethod;
 
+		mainCameraReferance.changeEvent += () => mainCamera = mainCameraReferance.sharedValue as Camera;
+		shootOriginReferance.changeEvent += () => shooterTransform = shootOriginReferance.sharedValue as Transform;
 
 		CreateProjectileStack();
-	}
-
-    private void Start()
-    {
-		shooterTransform = shootOrigin.sharedValue as Transform;
-		mainCamera = Camera.main;
 	}
 	#endregion
 

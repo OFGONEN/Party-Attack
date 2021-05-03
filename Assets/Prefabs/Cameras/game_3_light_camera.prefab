@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1805352981865325194}
   - component: {fileID: 1843109524994648092}
   - component: {fileID: 1779440086614218921}
+  - component: {fileID: 7400322879014190088}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -153,6 +154,20 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &7400322879014190088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779440086614218926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25df05d27d86b3849b57d550d90f256d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedReferanceProperty: {fileID: 11400000, guid: 457f512b1aebade4581a121981953b4e, type: 2}
+  referanceComponent: {fileID: 1797930464054342260}
 --- !u!1 &1780122578631515461
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25df05d27d86b3849b57d550d90f256d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedReferance: {fileID: 11400000, guid: 61ca28d8c463c6347a0cbd39530ac3b8, type: 2}
+  sharedReferanceProperty: {fileID: 11400000, guid: 85dd5a661f639ca4cabcfa323bdea4f7, type: 2}
   referanceComponent: {fileID: 1780122579102159725}
 --- !u!1 &1781139026812833682
 GameObject:

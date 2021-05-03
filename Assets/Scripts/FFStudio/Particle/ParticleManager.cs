@@ -71,7 +71,7 @@ namespace FFStudio
 		{
 			ParticleEffect particle;
 
-			if( effectStack.stack.Count > -1 )
+			if( effectStack.stack.Count > 0 )
 				particle = effectStack.stack.Pop();
 			else
 			{

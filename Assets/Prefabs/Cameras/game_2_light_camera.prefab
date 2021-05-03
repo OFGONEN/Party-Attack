@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 720234219956519286}
   - component: {fileID: 677065080752927390}
   - component: {fileID: 595073412206817279}
+  - component: {fileID: 9030703527214638502}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -153,6 +154,20 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &9030703527214638502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595073412206817278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25df05d27d86b3849b57d550d90f256d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedReferanceProperty: {fileID: 11400000, guid: 457f512b1aebade4581a121981953b4e, type: 2}
+  referanceComponent: {fileID: 580475209900778404}
 --- !u!1 &595349478724819555
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,7 +350,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 595622949996632895}
-  - component: {fileID: 595622949996632892}
+  - component: {fileID: 7205140617695938684}
   m_Layer: 0
   m_Name: shooting_origin
   m_TagString: Untagged
@@ -357,7 +372,7 @@ Transform:
   m_Father: {fileID: 595622948803225190}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 30, y: 30, z: 0.003}
---- !u!114 &595622949996632892
+--- !u!114 &7205140617695938684
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -369,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25df05d27d86b3849b57d550d90f256d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedReferance: {fileID: 11400000, guid: 61ca28d8c463c6347a0cbd39530ac3b8, type: 2}
+  sharedReferanceProperty: {fileID: 11400000, guid: 85dd5a661f639ca4cabcfa323bdea4f7, type: 2}
   referanceComponent: {fileID: 595622949996632895}
 --- !u!1 &596685187696535939
 GameObject:

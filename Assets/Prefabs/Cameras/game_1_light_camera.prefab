@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3043028704947968294}
-  - component: {fileID: 3043028704947968295}
+  - component: {fileID: 3996343986160544380}
   m_Layer: 0
   m_Name: shooting_origin
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 3043028705919688779}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3043028704947968295
+--- !u!114 &3996343986160544380
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25df05d27d86b3849b57d550d90f256d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedReferance: {fileID: 11400000, guid: 61ca28d8c463c6347a0cbd39530ac3b8, type: 2}
+  sharedReferanceProperty: {fileID: 11400000, guid: 85dd5a661f639ca4cabcfa323bdea4f7, type: 2}
   referanceComponent: {fileID: 3043028704947968294}
 --- !u!1 &3043028705919688778
 GameObject:
@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 3134821722997069030}
   - component: {fileID: 3105560714341538372}
   - component: {fileID: 3043028705676642880}
+  - component: {fileID: 8819655023737756001}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -246,6 +247,20 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &8819655023737756001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3043715402508129848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25df05d27d86b3849b57d550d90f256d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedReferanceProperty: {fileID: 11400000, guid: 457f512b1aebade4581a121981953b4e, type: 2}
+  referanceComponent: {fileID: 3058985348950430256}
 --- !u!1 &3043974813914085085
 GameObject:
   m_ObjectHideFlags: 0

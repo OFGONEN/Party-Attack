@@ -6,14 +6,14 @@ using FFStudio;
 public class SharedReferanceSetter : MonoBehaviour
 {
     #region Fields
-    public SharedReference sharedReferance;
+    public SharedReferenceProperty sharedReferanceProperty;
 	public Component referanceComponent;
 	#endregion
 
     #region UnityAPI
     private void Awake()
     {
-		sharedReferance.sharedValue = referanceComponent;
+		sharedReferanceProperty.SetValue( referanceComponent );
 	}
     #endregion
 }
