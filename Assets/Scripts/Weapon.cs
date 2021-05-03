@@ -23,6 +23,8 @@ public class Weapon : MonoBehaviour
 	private float nextFire;
 	private Camera mainCamera;
 	private Transform shooterTransform;
+
+	private int rayCastLayerMask;
 	#endregion
 
 	#region UnityAPI
@@ -50,6 +52,8 @@ public class Weapon : MonoBehaviour
 		shootOriginReferance.changeEvent += () => shooterTransform = shootOriginReferance.sharedValue as Transform;
 
 		CreateProjectileStack();
+
+		rayCastLayerMask = LayerMask.GetMask("Raycast-Only", "Net" );
 	}
 	#endregion
 
@@ -70,7 +74,7 @@ public class Weapon : MonoBehaviour
 		RaycastHit hit;
 		Ray ray = mainCamera.ScreenPointToRay( Input.mousePosition );
 
-		if( Physics.Raycast( ray, out hit ) )
+		if( Physics.Raycast( ray, out hit, 200, rayCastLayerMask ) )
 		{
 			// get a projectile
 			var projectile = GiveProjectile();
