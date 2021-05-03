@@ -14,10 +14,13 @@ public class UIManager : MonoBehaviour
 
 	[Header ("Shared Variables")]
 	public SharedFloatProperty levelLoadingProgressProperty;
+	public SharedFloatProperty levelProgressProperty;
 
 	[Header( "UI Elements" )]
 	public Image loadingScreenImage;
 	public UIImage levelLoadingProgressImage;
+	public UIText levelCountText;
+	public UIImage levelProgressImage;
 
 	#endregion
 
@@ -25,13 +28,17 @@ public class UIManager : MonoBehaviour
 
 	private void OnEnable()
     {
-		levelLoadingProgressProperty.changeEvent += LevelProgressResponse;
+		levelLoadingProgressProperty.changeEvent += LevelLoadingProgressResponse;
+		levelProgressProperty.changeEvent        += LevelProgressResponse;
+
 		levelLoadedResponse.OnEnable();
 	}
 
     private void OnDisable()
     {
-		levelLoadingProgressProperty.changeEvent -= LevelProgressResponse;
+		levelLoadingProgressProperty.changeEvent -= LevelLoadingProgressResponse;
+		levelProgressProperty.changeEvent        -= LevelProgressResponse;
+
 		levelLoadedResponse.OnDisable();
 	}
 
@@ -43,10 +50,15 @@ public class UIManager : MonoBehaviour
 
 	#region Implementation
 
-    void LevelProgressResponse()
+    void LevelLoadingProgressResponse()
     {
         levelLoadingProgressImage.imageRenderer.fillAmount = levelLoadingProgressProperty.sharedValue;
     }
+
+	void LevelProgressResponse()
+	{
+		levelProgressImage.imageRenderer.fillAmount = levelProgressProperty.sharedValue;
+	}
 
 	void LevelLoadedResponse()
 	{
@@ -54,6 +66,8 @@ public class UIManager : MonoBehaviour
 
 		sequance.Append( levelLoadingProgressImage.GoPopIn() );
 		sequance.Append( loadingScreenImage.DOFade( 0, GameSettings.Instance.uiEntityMoveTweenDuration ) );
+
+		levelCountText.textRenderer.text = "Level " + CurrentLevelData.Instance.currentConsecutiveLevel;
 	}
     #endregion
 }
