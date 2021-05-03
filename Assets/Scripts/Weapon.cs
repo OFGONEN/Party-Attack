@@ -83,10 +83,15 @@ public class Weapon : MonoBehaviour
 			projectile.transform.position = shooterTransform.position;
 
 			// set rotation
-			var lookRotation = Quaternion.LookRotation( hit.point - shooterTransform.position );
-			projectile.transform.rotation = lookRotation;
+			var lookRotation = Quaternion.LookRotation( hit.point - shooterTransform.position ).eulerAngles;
 
-			projectile.Fire( hit.point );
+			var temp = lookRotation.x;
+			lookRotation.x = 0;
+
+			projectile.transform.eulerAngles = lookRotation;
+
+			lookRotation.x = temp;
+			projectile.Fire( hit.point, lookRotation  );
 
 			nextFire = Time.time + fireRate;
 		}

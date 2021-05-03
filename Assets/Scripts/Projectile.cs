@@ -23,9 +23,11 @@ public abstract class Projectile : MonoBehaviour
 	#endregion
 
 	#region API
-	public void Fire(Vector3 targetPosition )
+	public void Fire(Vector3 targetPosition, Vector3 targetRotation )
 	{
 		var duration = Vector3.Distance( targetPosition, transform.position ) / GameSettings.Instance.projectile_Speed;
+
+		transform.DORotate( targetRotation, duration ).SetEase(Ease.Linear);
 
 		movementTween[0] = transform.DOMoveX( targetPosition.x, duration ).SetEase( Ease.Linear );
 		movementTween[1] = transform.DOMoveZ( targetPosition.z, duration ).SetEase( Ease.Linear );
