@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using FFStudio;
+using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
 	#region Fields
 
-    [Header ("Event Listeners")]
+	[Header( "Event Listeners" )]
+	public EventListenerDelegateResponse levelLoadedResponse;
 
-    [Header ("Shared Variables")]
-	public SharedFloatProperty levelProgressProperty;
+	[Header ("Shared Variables")]
+	public SharedFloatProperty levelLoadingProgressProperty;
 
 	[Header( "UI Elements" )]
-	public Image levelProgressImage;
+	public Image loadingScreenImage;
+	public UIImage levelLoadingProgressImage;
 
 	#endregion
 
@@ -22,17 +25,19 @@ public class UIManager : MonoBehaviour
 
 	private void OnEnable()
     {
-		levelProgressProperty.changeEvent += LevelProgressResponse;
+		levelLoadingProgressProperty.changeEvent += LevelProgressResponse;
+		levelLoadedResponse.OnEnable();
 	}
 
     private void OnDisable()
     {
-		levelProgressProperty.changeEvent -= LevelProgressResponse;
+		levelLoadingProgressProperty.changeEvent -= LevelProgressResponse;
+		levelLoadedResponse.OnDisable();
 	}
 
     private void Awake()
     {
-
+		levelLoadedResponse.response = LevelLoadedResponse;
 	}
 	#endregion
 
@@ -40,7 +45,15 @@ public class UIManager : MonoBehaviour
 
     void LevelProgressResponse()
     {
-        // levelProgressImage.fillAmount = levelProgressProperty.sharedValue;
+        levelLoadingProgressImage.imageRenderer.fillAmount = levelLoadingProgressProperty.sharedValue;
     }
+
+	void LevelLoadedResponse()
+	{
+		var sequance = DOTween.Sequence();
+
+		sequance.Append( levelLoadingProgressImage.GoPopIn() );
+		sequance.Append( loadingScreenImage.DOFade( 0, GameSettings.Instance.uiEntityMoveTweenDuration ) );
+	}
     #endregion
 }
