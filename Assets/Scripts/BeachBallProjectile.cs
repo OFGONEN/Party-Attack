@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FFStudio;
+using DG.Tweening;
 
 public class BeachBallProjectile : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class BeachBallProjectile : MonoBehaviour
 
 		var position = transform.position;
 		position.y = 0;
+
+		DOVirtual.DelayedCall( GameSettings.Instance.projectile_beachBall_disableAfterTime, () => gameObject.SetActive( false ) );
 
 		particleSpawnEvent.changePosition = true;
 		particleSpawnEvent.spawnPoint = position;
