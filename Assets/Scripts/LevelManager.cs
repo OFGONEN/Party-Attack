@@ -52,7 +52,6 @@ public class LevelManager : MonoBehaviour
 		ultimateProgress.SetValue( 0 );
 
 		// Spawn camera and set skybox
-        // TODO: Change source of enviroment lighting.
 		RenderSettings.skybox = CurrentLevelData.Instance.levelData.skyboxMaterial;
 
         if(currentCamera != null)

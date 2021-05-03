@@ -6,11 +6,17 @@ using DG.Tweening;
 
 public abstract class Projectile : MonoBehaviour
 {
-    #region Fields
-	public ProjectileStack projectileStack;
+	#region Fields
+	[Header("Fired Events")]
+	public FloatGameEvent ultimateProgressEvent;
 	public ParticleSpawnEvent particleEvent;
 
+	[Header("Sets")]
+	public ProjectileStack projectileStack;
+
+	[Header ("Damage Related")]
 	public float damage;
+	public float ultimateProgressCofactor;
 
 	protected Tween[] movementTween = new Tween[3];
 	#endregion

@@ -95,6 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7810d247644f636498825608f204b19b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileStack: {fileID: 11400000, guid: 27e2c4863abc1e048888d31d95f1b904, type: 2}
+  ultimateProgressEvent: {fileID: 11400000, guid: 68f6a443409d2bb4da188c902d3b939a, type: 2}
   particleEvent: {fileID: 11400000, guid: 0429c0cc661679842a5f69772d947481, type: 2}
+  projectileStack: {fileID: 11400000, guid: 27e2c4863abc1e048888d31d95f1b904, type: 2}
   damage: 50
+  ultimateProgressCofactor: 0.3

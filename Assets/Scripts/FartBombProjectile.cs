@@ -31,6 +31,9 @@ public class FartBombProjectile : Projectile
 			human.Health -= damage;
 			human.RunFrom( transform.position );
 		}
+
+		// raise ultimate progress  * hits.lenght
+		ultimateProgressEvent.eventValue = damage * ultimateProgressCofactor * hits.Length;
 	}
 	#endregion
 

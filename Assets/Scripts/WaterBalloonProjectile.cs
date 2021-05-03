@@ -21,6 +21,10 @@ public class WaterBalloonProjectile : Projectile
 		var human = other.GetComponentInParent< Human >();
 		human.Health -= damage;
 
+		// raise ultimate progress
+		ultimateProgressEvent.eventValue = damage * ultimateProgressCofactor;
+		ultimateProgressEvent.Raise();
+
 		TargetReached();
 	}
 
