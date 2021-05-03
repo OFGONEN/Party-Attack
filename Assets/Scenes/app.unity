@@ -156,6 +156,8 @@ MonoBehaviour:
     gameEvent: {fileID: 11400000, guid: 08b9079fb856230459ba418b28981185, type: 2}
   humanNeutralizedListener:
     gameEvent: {fileID: 11400000, guid: b9e2c8a1b4dc1ef408739116148006a2, type: 2}
+  levelRevealed: {fileID: 11400000, guid: be5502ede7f194b4cad32082aa9196eb, type: 2}
+  activateWaterGun: {fileID: 11400000, guid: f68bdf4c0f69cc6468fce841aef7a9de, type: 2}
   levelProgress: {fileID: 11400000, guid: 0184e6fd552c99e4b80f943bb5f300fe, type: 2}
   ultimateProgress: {fileID: 11400000, guid: 6b74c6fe1f618e5439fff59a41fc0a68, type: 2}
 --- !u!4 &65826802

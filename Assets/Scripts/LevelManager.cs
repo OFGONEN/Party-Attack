@@ -11,9 +11,14 @@ public class LevelManager : MonoBehaviour
 	public EventListenerDelegateResponse levelLoadedListener;
 	public EventListenerDelegateResponse humanNeutralizedListener;
 
+	[Header( "Fired Events" )]
+	public GameEvent levelRevealed; // TODO: Build only 
+	public GameEvent activateWaterGun; // TODO: Build only
+
 	[Header( "Level Releated" )]
 	public SharedFloatProperty levelProgress;
 	public SharedFloatProperty ultimateProgress;
+
 
 	// Private Variables
 	GameObject currentCamera;
@@ -59,6 +64,9 @@ public class LevelManager : MonoBehaviour
 			Destroy( currentCamera );
 
 		currentCamera = Instantiate( CurrentLevelData.Instance.levelData.cameraPrefab, transform );
+
+		levelRevealed.Raise();
+		activateWaterGun.Raise();
 	}
 
     void HumanNeutralizedResponse()
