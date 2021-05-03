@@ -25,7 +25,7 @@ MonoBehaviour:
     runDistance: 3
     hillJumpForce: 5
     ragdollTurnoffTime: 4
-  camera_RotationVector: {x: 0, y: 0.25, z: 0}
+  camera_RotationVector: {x: 0, y: 15, z: 0}
   projectile_Speed: 20
   projectile_fart_radius: 2
   projectile_fart_delay: 1

@@ -45,7 +45,7 @@ public class CameraManager : MonoBehaviour
 
     void Rotate()
     {
-		transform.Rotate( GameSettings.Instance.camera_RotationVector );
+		transform.Rotate( GameSettings.Instance.camera_RotationVector * Time.deltaTime );
 	}
     #endregion
 
