@@ -407,6 +407,7 @@ MonoBehaviour:
   particleEffectStacks:
   - {fileID: 11400000, guid: 9338fafb11d8d174fab4d1f98f45cb09, type: 2}
   - {fileID: 11400000, guid: e4eeab7939acd514789688e7059cd822, type: 2}
+  - {fileID: 11400000, guid: 03bac966b7dab5640a16e0732e64e62a, type: 2}
 --- !u!1 &912509282
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,6 +718,7 @@ GameObject:
   - component: {fileID: 1623424420}
   - component: {fileID: 1623424422}
   - component: {fileID: 1623424423}
+  - component: {fileID: 1623424424}
   m_Layer: 0
   m_Name: manager_input
   m_TagString: Untagged
@@ -780,6 +782,7 @@ MonoBehaviour:
   tapInputEvent: {fileID: 11400000, guid: 182cfa2632cfdba49bfaf3471d114d23, type: 2}
   fingerUpdate: {fileID: 11400000, guid: eddc3259425f9954ca67af636169abda, type: 2}
   fingerDown: {fileID: 11400000, guid: a07c114df19e35d459a9cdbfa676dd86, type: 2}
+  fingerUp: {fileID: 11400000, guid: ebcc17ffe132ca44794a67ea6810385e, type: 2}
 --- !u!114 &1623424422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -881,3 +884,101 @@ MonoBehaviour:
   onWorld:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1623424424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623424418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 571b065edc65a4f41b4ea02b27b6113a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoreStartedOverGui: 1
+  IgnoreIsOverGui: 0
+  RequiredSelectable: {fileID: 0}
+  onFinger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1623424421}
+        m_TargetAssemblyTypeName: FFStudio.MobileInput, Assembly-CSharp
+        m_MethodName: FingerUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  ScreenDepth:
+    Conversion: 1
+    Camera: {fileID: 0}
+    Object: {fileID: 0}
+    Layers:
+      serializedVersion: 2
+      m_Bits: 4294967291
+    Distance: 0
+  onPosition:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1001 &5441219684539265969
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5441219684178529280, guid: 125edd6af3cacc84c965d600e8077a34, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441219684178529280, guid: 125edd6af3cacc84c965d600e8077a34, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441219684178529280, guid: 125edd6af3cacc84c965d600e8077a34, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441219684178529280, guid: 125edd6af3cacc84c965d600e8077a34, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441219684178529280, guid: 125edd6af3cacc84c965d600e8077a34, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441219684178529280, guid: 125edd6af3cacc84c965d600e8077a34, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441219684178529280, guid: 125edd6af3cacc84c965d600e8077a34, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441219684178529280, guid: 125edd6af3cacc84c965d600e8077a34, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441219684178529280, guid: 125edd6af3cacc84c965d600e8077a34, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441219684178529280, guid: 125edd6af3cacc84c965d600e8077a34, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441219684178529280, guid: 125edd6af3cacc84c965d600e8077a34, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441219684178529281, guid: 125edd6af3cacc84c965d600e8077a34, type: 3}
+      propertyPath: m_Name
+      value: weapon_beachBall
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 125edd6af3cacc84c965d600e8077a34, type: 3}

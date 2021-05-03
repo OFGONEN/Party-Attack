@@ -28,4 +28,7 @@ MonoBehaviour:
   camera_RotationVector: {x: 0, y: 0.25, z: 0}
   projectile_Speed: 20
   projectile_fart_radius: 2
+  projectile_fart_delay: 1
   projectile_target_triggerLayer: 3
+  projectile_beachBall_force: 100
+  projectile_beachBall_disableAfterTime: 3
