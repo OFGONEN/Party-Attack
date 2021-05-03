@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5137772d7f1240e49b839836e41b1e14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleSpawnEvent: {fileID: 11400000, guid: 0429c0cc661679842a5f69772d947481, type: 2}
 --- !u!135 &415779164706083935
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9537,7 +9538,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4399550786381963013}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c4f2726ceed431a4c9c22dba9adcdebf, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
