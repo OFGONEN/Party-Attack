@@ -10,6 +10,11 @@ public class LevelManager : MonoBehaviour
 	[Header( "Event Listeners" )]
 	public EventListenerDelegateResponse levelLoadedListener;
 	public EventListenerDelegateResponse humanNeutralizedListener;
+	public EventListenerDelegateResponse ultimateProgressListener;
+	public EventListenerDelegateResponse ultimateUsedListener;
+
+	[Header( "Level Releated" )]
+	public GameEvent ultimateUnlocked;
 
 	[Header( "Level Releated" )]
 	public SharedFloatProperty levelProgress;
@@ -19,6 +24,7 @@ public class LevelManager : MonoBehaviour
 	GameObject currentCamera;
 	int humanCount;
 	int neutralizedHumanCount;
+	FloatGameEvent ultimateProgressEvent;
 	#endregion
 
 	#region UnityAPI
@@ -26,19 +32,27 @@ public class LevelManager : MonoBehaviour
 	private void OnEnable()
     {
 		levelLoadedListener     .OnEnable();
+		ultimateUsedListener    .OnEnable();
 		humanNeutralizedListener.OnEnable();
+		ultimateProgressListener.OnEnable();
 	}
 
     private void OnDisable()
     {
 		levelLoadedListener     .OnDisable();
+		ultimateUsedListener    .OnDisable();
 		humanNeutralizedListener.OnDisable();
+		ultimateProgressListener.OnDisable();
     }
 
     private void Awake()
     {
+		ultimateProgressEvent = ultimateProgressListener.gameEvent as FloatGameEvent;
+
 		levelLoadedListener.response      = LevelLoadedResponse;
+		ultimateUsedListener.response 	  = UltimateUsedResponse;
 		humanNeutralizedListener.response = HumanNeutralizedResponse;
+		ultimateProgressListener.response = UltimateProgressResponse;
 	}
 
 	#endregion
@@ -67,6 +81,23 @@ public class LevelManager : MonoBehaviour
 
         if(neutralizedHumanCount == humanCount)
             FFLogger.Log( "Level Finished" );
+	}
+
+	void UltimateProgressResponse()
+	{
+		ultimateProgress.SetValue( ultimateProgress.sharedValue + ultimateProgressEvent.eventValue );
+
+		if(ultimateProgress.sharedValue >= 100)
+		{
+			ultimateUnlocked.Raise();
+			ultimateProgressListener.response = ExtensionMethods.EmptyMethod;
+		}
+	}
+
+	void UltimateUsedResponse()
+	{
+		ultimateProgress.sharedValue = 0;
+		ultimateProgressListener.response = UltimateProgressResponse;
 	}
 
 	#endregion
