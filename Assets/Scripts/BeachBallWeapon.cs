@@ -62,12 +62,13 @@ public class BeachBallWeapon : MonoBehaviour
 		aimInputListener.response = Aim;
 		fireInputListener.response = Shoot;
 		crosshair.transform.position = shooterTransform.position;
+		crosshair.gameObject.SetActive( true );
 	}
 	void DisActivateWeapon()
 	{
 		aimInputListener.response = ExtensionMethods.EmptyMethod;
 		fireInputListener.response = ExtensionMethods.EmptyMethod;
-		crosshair.transform.position = shooterTransform.position;
+		crosshair.gameObject.SetActive( false );
 	}
 
     void Aim()
@@ -77,13 +78,16 @@ public class BeachBallWeapon : MonoBehaviour
 
 		if( Physics.Raycast( ray, out hit, 200, rayCastLayerMask ) )
         {
-			crosshair.transform.position = hit.point;
+			var position = hit.point;
+			position.y += 0.5f;
+			crosshair.transform.position = position;
 		}
     }
 
     void Shoot()
     {
-        // Neutralize beachball
+		return;
+		// Neutralize beachball
 		beachBall.velocity        = Vector3.zero;
 		beachBall.angularVelocity = Vector3.zero;
 		beachBall.gameObject.SetActive( true );
