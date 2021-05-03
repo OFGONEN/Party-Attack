@@ -34,6 +34,7 @@ namespace FFStudio
 		[Foldout( "Projectile Settings" )] public float projectile_fart_radius = 1f;
 		[Foldout( "Projectile Settings" )] public float projectile_fart_delay = 1f;
 		[Foldout( "Projectile Settings" ) ] public int projectile_target_triggerLayer; // Target == Human
+		[Foldout( "Projectile Settings" ) ] public float projectile_beachBall_force; 
 
 		private static GameSettings instance;
 
