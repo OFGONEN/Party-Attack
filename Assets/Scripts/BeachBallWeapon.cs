@@ -53,6 +53,9 @@ public class BeachBallWeapon : MonoBehaviour
 		shootOriginReferance.changeEvent += () => shooterTransform = shootOriginReferance.sharedValue as Transform;
 
 		rayCastLayerMask = LayerMask.GetMask( "Raycast-Only");
+
+		crosshair.gameObject.SetActive( false );
+		beachBall.gameObject.SetActive( false );
 	}
 	#endregion
 
@@ -86,7 +89,6 @@ public class BeachBallWeapon : MonoBehaviour
 
     void Shoot()
     {
-		return;
 		// Neutralize beachball
 		beachBall.velocity        = Vector3.zero;
 		beachBall.angularVelocity = Vector3.zero;
@@ -102,6 +104,8 @@ public class BeachBallWeapon : MonoBehaviour
 		beachBall.transform.eulerAngles = lookRotation;
 
 		beachBall.AddForce( direction * GameSettings.Instance.projectile_beachBall_force, ForceMode.Force );
+
+		DisActivateWeapon();
 	}
     #endregion
 
