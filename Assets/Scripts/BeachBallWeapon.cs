@@ -15,6 +15,7 @@ public class BeachBallWeapon : MonoBehaviour
 	[Header( "Shooting" )]
 	public SharedReferenceProperty shootOriginReferance;
 	public SharedReferenceProperty mainCameraReferance;
+	public GameEvent ultimateUsed;
 	public Rigidbody beachBall;
 	public GameObject crosshair;
 
@@ -105,6 +106,7 @@ public class BeachBallWeapon : MonoBehaviour
 
 		beachBall.AddForce( direction * GameSettings.Instance.projectile_beachBall_force, ForceMode.Force );
 
+		ultimateUsed.Raise();
 		DisActivateWeapon();
 	}
     #endregion

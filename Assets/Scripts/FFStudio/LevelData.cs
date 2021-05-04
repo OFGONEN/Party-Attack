@@ -16,5 +16,9 @@ namespace FFStudio
 		public GameObject cameraPrefab;
 		public Material skyboxMaterial;
 
+		[Foldout( "Weapon Settings" )] public int weapon_water_ammoCount = 100;
+		[Foldout( "Weapon Settings" )] public int weapon_fart_ammoCount = 2;
+
+
 	}
 }

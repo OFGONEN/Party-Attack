@@ -57,8 +57,10 @@ MonoBehaviour:
     - {fileID: 11400000, guid: d925a35b8e300aa4b93c5abe3a531a38, type: 2}
     - {fileID: 11400000, guid: f68bdf4c0f69cc6468fce841aef7a9de, type: 2}
     - {fileID: 11400000, guid: ed5a7c00b5d4f184abb312bf08b0ac90, type: 2}
+    - {fileID: 11400000, guid: 48b07f98cf0a05044b63e912cb43736c, type: 2}
   shootOriginReferance: {fileID: 11400000, guid: 45ce6fa12fd57b7498b8fbd8e0d6f093, type: 2}
   mainCameraReferance: {fileID: 11400000, guid: 457f512b1aebade4581a121981953b4e, type: 2}
+  ultimateUsed: {fileID: 11400000, guid: f57ad8284fccd9f469d46011af00a803, type: 2}
   beachBall: {fileID: 2179172149347036487}
   crosshair: {fileID: 4006867435740357992}
 --- !u!1001 &5441219683322133220

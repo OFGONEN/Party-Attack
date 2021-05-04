@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
 	#region Fields
 	[Header( "Event Listeners" )]
 	public EventListenerDelegateResponse levelLoadedListener;
+	public EventListenerDelegateResponse levelRevealedListener;
 	public EventListenerDelegateResponse humanNeutralizedListener;
 	public EventListenerDelegateResponse ultimateProgressListener;
 	public EventListenerDelegateResponse ultimateUsedListener;
@@ -19,6 +20,11 @@ public class LevelManager : MonoBehaviour
 	[Header( "Level Releated" )]
 	public SharedFloatProperty levelProgress;
 	public SharedFloatProperty ultimateProgress;
+
+	[Header( "Fired Events" )]
+	public GameEvent defaultWeaponActivate;
+	public GameEvent deactivateAllWeapon;
+	public GameEvent levelCompleted;
 
 	// Private Variables
 	GameObject currentCamera;
@@ -32,6 +38,7 @@ public class LevelManager : MonoBehaviour
 	private void OnEnable()
     {
 		levelLoadedListener     .OnEnable();
+		levelRevealedListener   .OnEnable();
 		ultimateUsedListener    .OnEnable();
 		humanNeutralizedListener.OnEnable();
 		ultimateProgressListener.OnEnable();
@@ -40,6 +47,7 @@ public class LevelManager : MonoBehaviour
     private void OnDisable()
     {
 		levelLoadedListener     .OnDisable();
+		levelRevealedListener   .OnDisable();
 		ultimateUsedListener    .OnDisable();
 		humanNeutralizedListener.OnDisable();
 		ultimateProgressListener.OnDisable();
@@ -51,8 +59,8 @@ public class LevelManager : MonoBehaviour
 
 		levelLoadedListener.response      = LevelLoadedResponse;
 		ultimateUsedListener.response 	  = UltimateUsedResponse;
+		levelRevealedListener.response    = defaultWeaponActivate.Raise;
 		humanNeutralizedListener.response = HumanNeutralizedResponse;
-		ultimateProgressListener.response = UltimateProgressResponse;
 	}
 
 	#endregion
@@ -64,6 +72,8 @@ public class LevelManager : MonoBehaviour
 		neutralizedHumanCount = 0;
 		levelProgress.SetValue( 0 );
 		ultimateProgress.SetValue( 0 );
+
+		ultimateProgressListener.response = UltimateProgressResponse;
 
 		// Spawn camera and set skybox
 		RenderSettings.skybox = CurrentLevelData.Instance.levelData.skyboxMaterial;
@@ -80,12 +90,15 @@ public class LevelManager : MonoBehaviour
 		levelProgress.SetValue( ( float )neutralizedHumanCount / humanCount  );
 
         if(neutralizedHumanCount == humanCount)
-            FFLogger.Log( "Level Finished" );
+		{
+			levelCompleted.Raise();
+			deactivateAllWeapon.Raise();
+		}
 	}
 
 	void UltimateProgressResponse()
 	{
-		ultimateProgress.SetValue( ultimateProgress.sharedValue + ultimateProgressEvent.eventValue );
+		ultimateProgress.SetValue( Mathf.Min(ultimateProgress.sharedValue + ultimateProgressEvent.eventValue, 100) );
 
 		if(ultimateProgress.sharedValue >= 100)
 		{
