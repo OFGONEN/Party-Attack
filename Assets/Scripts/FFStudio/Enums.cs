@@ -5,4 +5,11 @@ namespace FFStudio
         Equlize,
         PreserveAspect
     }
+
+	public enum WeaponType
+    {
+        Water,
+        Fart,
+        Beach
+    }
 }

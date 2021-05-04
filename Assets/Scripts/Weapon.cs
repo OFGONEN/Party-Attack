@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour
 	[Header( "Event Listeners" )]
 	public EventListenerDelegateResponse inputListener;
 	public EventListenerDelegateResponse activateWeaponListener;
+	public EventListenerDelegateResponse levelLoadedListener;
 	public MultipleEventListenerDelegateResponse disActivateWeaponListener;
 
 
@@ -16,11 +17,13 @@ public class Weapon : MonoBehaviour
 	public SharedReferenceProperty shootOriginReferance;
 	public SharedReferenceProperty mainCameraReferance;
 	public ProjectileStack projectileStack;
-	public float fireRate;
+	public WeaponType weaponType;
 
 
 	// Private Fields
+	private float fireRate;
 	private float nextFire;
+	private int ammoCount;
 	private Camera mainCamera;
 	private Transform shooterTransform;
 
@@ -30,15 +33,17 @@ public class Weapon : MonoBehaviour
 	#region UnityAPI
 	private void OnEnable()
     {
-		inputListener.OnEnable();
-		activateWeaponListener.OnEnable();
+		inputListener            .OnEnable();
+		levelLoadedListener      .OnEnable();
+		activateWeaponListener   .OnEnable();
 		disActivateWeaponListener.OnEnable();
 	}
 
     private void OnDisable()
     {
-		inputListener.OnDisable();
-		activateWeaponListener.OnDisable();
+		inputListener            .OnDisable();
+		levelLoadedListener      .OnDisable();
+		activateWeaponListener   .OnDisable();
 		disActivateWeaponListener.OnDisable();
 	}
 
@@ -46,7 +51,8 @@ public class Weapon : MonoBehaviour
     {
 		activateWeaponListener.response    = ActivateWeapon;
 		disActivateWeaponListener.response = DisActivateWeapon;
-		inputListener.response = ExtensionMethods.EmptyMethod;
+		levelLoadedListener.response 	   = SetWeaponInfo;
+		inputListener.response 			   = ExtensionMethods.EmptyMethod;
 
 		mainCameraReferance.changeEvent += () => mainCamera = mainCameraReferance.sharedValue as Camera;
 		shootOriginReferance.changeEvent += () => shooterTransform = shootOriginReferance.sharedValue as Transform;
@@ -68,8 +74,10 @@ public class Weapon : MonoBehaviour
 	}
 	void Shoot()
     {
-        if(Time.time < nextFire)
+        if(Time.time < nextFire || ammoCount == 0)
 			return;
+
+		ammoCount--;
 
 		RaycastHit hit;
 		Ray ray = mainCamera.ScreenPointToRay( Input.mousePosition );
@@ -124,6 +132,21 @@ public class Weapon : MonoBehaviour
 
 		projectile.gameObject.SetActive( true );
 		return projectile;
+	}
+
+	void SetWeaponInfo()
+	{
+		switch (weaponType)
+		{
+			case WeaponType.Water: 
+				fireRate = GameSettings.Instance.weapon_water_fireRate;
+				ammoCount = CurrentLevelData.Instance.levelData.weapon_water_ammoCount;
+				break;
+			case WeaponType.Fart:  
+				fireRate = GameSettings.Instance.weapon_fart_fireRate;
+				ammoCount = CurrentLevelData.Instance.levelData.weapon_fart_ammoCount;
+				break;
+		}
 	}
 	#endregion
 }

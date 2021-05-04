@@ -30,6 +30,9 @@ namespace FFStudio
 
 		[Foldout( "Camera Settings" )] public Vector3 camera_RotationVector;
 
+		[Foldout( "Weapon Settings" )] public float weapon_water_fireRate = 0.15f;
+		[Foldout( "Weapon Settings" )] public float weapon_fart_fireRate = 1f;
+
 		[Foldout( "Projectile Settings" )] public float projectile_Speed = 20f;
 		[Foldout( "Projectile Settings" )] public float projectile_fart_radius = 1f;
 		[Foldout( "Projectile Settings" )] public float projectile_fart_delay = 1f;

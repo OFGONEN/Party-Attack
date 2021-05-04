@@ -47,6 +47,8 @@ MonoBehaviour:
     gameEvent: {fileID: 11400000, guid: eddc3259425f9954ca67af636169abda, type: 2}
   activateWeaponListener:
     gameEvent: {fileID: 11400000, guid: f68bdf4c0f69cc6468fce841aef7a9de, type: 2}
+  levelLoadedListener:
+    gameEvent: {fileID: 11400000, guid: 08b9079fb856230459ba418b28981185, type: 2}
   disActivateWeaponListener:
     gameEvent: {fileID: 0}
     gameEvents:
@@ -56,4 +58,4 @@ MonoBehaviour:
   shootOriginReferance: {fileID: 11400000, guid: 85dd5a661f639ca4cabcfa323bdea4f7, type: 2}
   mainCameraReferance: {fileID: 11400000, guid: 457f512b1aebade4581a121981953b4e, type: 2}
   projectileStack: {fileID: 11400000, guid: 542d66dadf007b64b8103ec12a395fdd, type: 2}
-  fireRate: 0.15
+  weaponType: 0
