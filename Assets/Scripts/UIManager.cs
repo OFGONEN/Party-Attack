@@ -65,7 +65,7 @@ public class UIManager : MonoBehaviour
 		var sequance = DOTween.Sequence();
 
 		sequance.Append( levelLoadingProgressImage.GoPopIn() );
-		sequance.Append( loadingScreenImage.DOFade( 0, GameSettings.Instance.uiEntityMoveTweenDuration ) );
+		sequance.Append( loadingScreenImage.DOFade( 0, 0.1f  ) ); // GameSettings.Instance.uiEntityMoveTweenDuration
 
 		levelCountText.textRenderer.text = "Level " + CurrentLevelData.Instance.currentConsecutiveLevel;
 	}
