@@ -11,6 +11,8 @@ public class Human : MonoBehaviour
 	#region Fields
 	[Header ("Fired Events")]
 	public GameEvent humanNeutralized;
+
+	public Rigidbody hibRigidbody;
 	public enum State
     {
         Dancing, Running, Neutralized_Ragdoll, Neutralized_Stationary

@@ -38,6 +38,9 @@ namespace FFStudio
 		[Foldout( "Projectile Settings" )] public float projectile_fart_delay = 1f;
 		[Foldout( "Projectile Settings" ) ] public int projectile_target_triggerLayer; // Target == Human
 		[Foldout( "Projectile Settings" ) ] public float projectile_beachBall_force; 
+		[Foldout( "Projectile Settings" ) ] public float projectile_beachBall_explosion_force = 500f; 
+		[Foldout( "Projectile Settings" ) ] public float projectile_beachBall_explosion_radius = 50f; 
+		[Foldout( "Projectile Settings" ) ] public float projectile_beachBall_explosion_upwardsModifier = 10f; 
 		[Foldout( "Projectile Settings" ), Tooltip("Starts at first human contact") ] public float projectile_beachBall_disableAfterTime; 
 
 		private static GameSettings instance;

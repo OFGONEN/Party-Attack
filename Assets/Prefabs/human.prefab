@@ -549,6 +549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   humanNeutralized: {fileID: 11400000, guid: b9e2c8a1b4dc1ef408739116148006a2, type: 2}
+  hibRigidbody: {fileID: 3301750741410722200}
   <CurrentState>k__BackingField: 0
 --- !u!95 &5638070540759588643
 Animator:

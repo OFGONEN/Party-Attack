@@ -26,9 +26,14 @@ MonoBehaviour:
     hillJumpForce: 5
     ragdollTurnoffTime: 4
   camera_RotationVector: {x: 0, y: 15, z: 0}
+  weapon_water_fireRate: 0.15
+  weapon_fart_fireRate: 1
   projectile_Speed: 20
   projectile_fart_radius: 2
   projectile_fart_delay: 1
   projectile_target_triggerLayer: 3
   projectile_beachBall_force: 100
+  projectile_beachBall_explosion_force: 500
+  projectile_beachBall_explosion_radius: 50
+  projectile_beachBall_explosion_upwardsModifier: 10
   projectile_beachBall_disableAfterTime: 3

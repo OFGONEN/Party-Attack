@@ -17,6 +17,8 @@ public class BeachBallProjectile : MonoBehaviour
         var human = other.GetComponentInParent< Human >();
 		human.Health -= GameSettings.Instance.human.startingHealth;
 
+		human.hibRigidbody.AddExplosionForce( GameSettings.Instance.projectile_beachBall_explosion_force, transform.position, 50, 10, ForceMode.Impulse );
+
 		var position = transform.position;
 		position.y = 0;
 
