@@ -13,9 +13,6 @@ public class UIWeapon : UIEntity
 	public EventListenerDelegateResponse ammoEventListener;
 	// public MultipleEventListenerDelegateResponse disactivateWeaponListener;
 
-	[Header( "Fired Events" )]
-	public GameEvent activateWeapon;
-
 	[Header( "UI Elements" )]
 	public TextMeshProUGUI ammoCountText;
 

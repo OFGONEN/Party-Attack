@@ -90,7 +90,7 @@ public class LevelManager : MonoBehaviour
 
 	void UltimateProgressResponse()
 	{
-		ultimateProgress.SetValue( ultimateProgress.sharedValue + ultimateProgressEvent.eventValue );
+		ultimateProgress.SetValue( Mathf.Min(ultimateProgress.sharedValue + ultimateProgressEvent.eventValue, 100) );
 
 		if(ultimateProgress.sharedValue >= 100)
 		{

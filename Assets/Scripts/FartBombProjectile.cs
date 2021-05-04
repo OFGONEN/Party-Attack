@@ -34,6 +34,7 @@ public class FartBombProjectile : Projectile
 
 		// raise ultimate progress  * hits.lenght
 		ultimateProgressEvent.eventValue = damage * ultimateProgressCofactor * hits.Length;
+		ultimateProgressEvent.Raise();
 	}
 	#endregion
 
