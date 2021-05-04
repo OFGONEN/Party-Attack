@@ -55,6 +55,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 401725cae1b28774baafc7f0dcf0a64c, type: 2}
     - {fileID: 11400000, guid: f68bdf4c0f69cc6468fce841aef7a9de, type: 2}
     - {fileID: 11400000, guid: e4ef66300c26a42458c391ec67c313a8, type: 2}
+    - {fileID: 11400000, guid: 48b07f98cf0a05044b63e912cb43736c, type: 2}
   fireEvent: {fileID: 11400000, guid: 40ec43fbebbca974eaea55cc73537e83, type: 2}
   shootOriginReferance: {fileID: 11400000, guid: 85dd5a661f639ca4cabcfa323bdea4f7, type: 2}
   mainCameraReferance: {fileID: 11400000, guid: 457f512b1aebade4581a121981953b4e, type: 2}

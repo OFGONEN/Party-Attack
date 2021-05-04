@@ -23,6 +23,7 @@ public class LevelManager : MonoBehaviour
 
 	[Header( "Fired Events" )]
 	public GameEvent defaultWeaponActivate;
+	public GameEvent deactivateAllWeapon;
 	public GameEvent levelCompleted;
 
 	// Private Variables
@@ -88,7 +89,10 @@ public class LevelManager : MonoBehaviour
 		levelProgress.SetValue( ( float )neutralizedHumanCount / humanCount  );
 
         if(neutralizedHumanCount == humanCount)
+		{
 			levelCompleted.Raise();
+			deactivateAllWeapon.Raise();
+		}
 	}
 
 	void UltimateProgressResponse()
