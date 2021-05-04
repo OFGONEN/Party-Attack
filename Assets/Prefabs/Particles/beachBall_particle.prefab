@@ -9679,7 +9679,7 @@ GameObject:
   - component: {fileID: 199461352040680368}
   - component: {fileID: 3474710988166790869}
   m_Layer: 0
-  m_Name: FX_ArtilleryStrike_01
+  m_Name: beachBall_particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14507,6 +14507,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1090ffb03725f44c818ff2a3358ee68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadNewLevelListener:
+    gameEvent: {fileID: 11400000, guid: f21048912f45f4f4ba5088a96779eb2f, type: 2}
   particleStack: {fileID: 11400000, guid: 03bac966b7dab5640a16e0732e64e62a, type: 2}
   particleStoppedEvent: {fileID: 11400000, guid: 76fbcda639fd0594fae28f32c79cd202, type: 2}
   alias: BeachBall

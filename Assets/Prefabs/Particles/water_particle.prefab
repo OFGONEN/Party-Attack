@@ -14346,6 +14346,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1090ffb03725f44c818ff2a3358ee68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadNewLevelListener:
+    gameEvent: {fileID: 11400000, guid: f21048912f45f4f4ba5088a96779eb2f, type: 2}
   particleStack: {fileID: 11400000, guid: e4eeab7939acd514789688e7059cd822, type: 2}
   particleStoppedEvent: {fileID: 11400000, guid: 76fbcda639fd0594fae28f32c79cd202, type: 2}
   alias: Water
