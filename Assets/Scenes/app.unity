@@ -1576,6 +1576,7 @@ GameObject:
   - component: {fileID: 1686222006}
   - component: {fileID: 1686222005}
   - component: {fileID: 1686222004}
+  - component: {fileID: 1686222007}
   m_Layer: 5
   m_Name: Image_weapon_fart
   m_TagString: Untagged
@@ -1685,6 +1686,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686222002}
   m_CullTransparentMesh: 1
+--- !u!114 &1686222007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686222002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6c5e8cb64107ef42b7ce92625fa62ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiTransform: {fileID: 1686222003}
+  destinationTransform: {fileID: 0}
+  startPosition: {x: 0, y: 0, z: 0}
+  startScale: {x: 0, y: 0, z: 0}
+  ammoEventListener:
+    gameEvent: {fileID: 11400000, guid: 40ec43fbebbca974eaea55cc73537e83, type: 2}
+  activateWeapon: {fileID: 11400000, guid: d925a35b8e300aa4b93c5abe3a531a38, type: 2}
+  ammoCountText: {fileID: 681068220}
 --- !u!1 &1808252229
 GameObject:
   m_ObjectHideFlags: 0
@@ -2126,6 +2147,7 @@ GameObject:
   - component: {fileID: 2093235480}
   - component: {fileID: 2093235479}
   - component: {fileID: 2093235478}
+  - component: {fileID: 2093235481}
   m_Layer: 5
   m_Name: Image_weapon_water
   m_TagString: Untagged
@@ -2235,6 +2257,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2093235476}
   m_CullTransparentMesh: 1
+--- !u!114 &2093235481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093235476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6c5e8cb64107ef42b7ce92625fa62ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiTransform: {fileID: 2093235477}
+  destinationTransform: {fileID: 0}
+  startPosition: {x: 0, y: 0, z: 0}
+  startScale: {x: 0, y: 0, z: 0}
+  ammoEventListener:
+    gameEvent: {fileID: 11400000, guid: ae379878421d6f949a31a04cc499f68e, type: 2}
+  activateWeapon: {fileID: 11400000, guid: f68bdf4c0f69cc6468fce841aef7a9de, type: 2}
+  ammoCountText: {fileID: 1876503433}
 --- !u!1001 &5441219684539265969
 PrefabInstance:
   m_ObjectHideFlags: 0
