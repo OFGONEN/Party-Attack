@@ -99,7 +99,7 @@ MonoBehaviour:
   ultimateProgressEvent: {fileID: 11400000, guid: 68f6a443409d2bb4da188c902d3b939a, type: 2}
   particleEvent: {fileID: 11400000, guid: 0429c0cc661679842a5f69772d947481, type: 2}
   projectileStack: {fileID: 11400000, guid: 542d66dadf007b64b8103ec12a395fdd, type: 2}
-  damage: 10
+  damage: 100
   ultimateProgressCofactor: 0.25
 --- !u!135 &1239562229946832961
 SphereCollider:
