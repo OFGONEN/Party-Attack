@@ -20,6 +20,9 @@ public class LevelManager : MonoBehaviour
 	public SharedFloatProperty levelProgress;
 	public SharedFloatProperty ultimateProgress;
 
+	[Header( "Fired Events" )]
+	public GameEvent defaultWeaponActivate;
+
 	// Private Variables
 	GameObject currentCamera;
 	int humanCount;
@@ -72,6 +75,8 @@ public class LevelManager : MonoBehaviour
 			Destroy( currentCamera );
 
 		currentCamera = Instantiate( CurrentLevelData.Instance.levelData.cameraPrefab, transform );
+
+		defaultWeaponActivate.Raise();
 	}
 
     void HumanNeutralizedResponse()

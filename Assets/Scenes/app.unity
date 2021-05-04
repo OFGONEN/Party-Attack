@@ -163,6 +163,7 @@ MonoBehaviour:
   ultimateUnlocked: {fileID: 11400000, guid: 6751bb0e2d8c1c14e8645a64fb93ea3f, type: 2}
   levelProgress: {fileID: 11400000, guid: 0184e6fd552c99e4b80f943bb5f300fe, type: 2}
   ultimateProgress: {fileID: 11400000, guid: 6b74c6fe1f618e5439fff59a41fc0a68, type: 2}
+  defaultWeaponActivate: {fileID: 11400000, guid: f68bdf4c0f69cc6468fce841aef7a9de, type: 2}
 --- !u!4 &65826802
 Transform:
   m_ObjectHideFlags: 0
