@@ -1647,7 +1647,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1686222005}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: d925a35b8e300aa4b93c5abe3a531a38, type: 2}
+        m_TargetAssemblyTypeName: FFStudio.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1686222005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1702,10 +1714,13 @@ MonoBehaviour:
   destinationTransform: {fileID: 0}
   startPosition: {x: 0, y: 0, z: 0}
   startScale: {x: 0, y: 0, z: 0}
+  levelLoadedListener:
+    gameEvent: {fileID: 11400000, guid: 08b9079fb856230459ba418b28981185, type: 2}
   ammoEventListener:
     gameEvent: {fileID: 11400000, guid: 40ec43fbebbca974eaea55cc73537e83, type: 2}
   activateWeapon: {fileID: 11400000, guid: d925a35b8e300aa4b93c5abe3a531a38, type: 2}
   ammoCountText: {fileID: 681068220}
+  selectionButton: {fileID: 0}
 --- !u!1 &1808252229
 GameObject:
   m_ObjectHideFlags: 0
@@ -2218,7 +2233,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2093235479}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: f68bdf4c0f69cc6468fce841aef7a9de, type: 2}
+        m_TargetAssemblyTypeName: FFStudio.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2093235479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2273,10 +2300,13 @@ MonoBehaviour:
   destinationTransform: {fileID: 0}
   startPosition: {x: 0, y: 0, z: 0}
   startScale: {x: 0, y: 0, z: 0}
+  levelLoadedListener:
+    gameEvent: {fileID: 11400000, guid: 08b9079fb856230459ba418b28981185, type: 2}
   ammoEventListener:
     gameEvent: {fileID: 11400000, guid: ae379878421d6f949a31a04cc499f68e, type: 2}
   activateWeapon: {fileID: 11400000, guid: f68bdf4c0f69cc6468fce841aef7a9de, type: 2}
   ammoCountText: {fileID: 1876503433}
+  selectionButton: {fileID: 0}
 --- !u!1001 &5441219684539265969
 PrefabInstance:
   m_ObjectHideFlags: 0
