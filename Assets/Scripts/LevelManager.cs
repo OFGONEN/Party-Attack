@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour
 
 	[Header( "Fired Events" )]
 	public GameEvent defaultWeaponActivate;
+	public GameEvent levelCompleted;
 
 	// Private Variables
 	GameObject currentCamera;
@@ -85,7 +86,7 @@ public class LevelManager : MonoBehaviour
 		levelProgress.SetValue( ( float )neutralizedHumanCount / humanCount  );
 
         if(neutralizedHumanCount == humanCount)
-            FFLogger.Log( "Level Finished" );
+			levelCompleted.Raise();
 	}
 
 	void UltimateProgressResponse()

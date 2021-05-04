@@ -22,6 +22,10 @@ public class UIManager : MonoBehaviour
 	public UIText levelCountText;
 	public UIImage levelProgressImage;
 
+	[Header( "Fired Events" )]
+	public GameEvent levelRevealedEvent;
+
+
 	#endregion
 
 	#region UnityAPI
@@ -66,6 +70,7 @@ public class UIManager : MonoBehaviour
 
 		sequance.Append( levelLoadingProgressImage.GoPopIn() );
 		sequance.Append( loadingScreenImage.DOFade( 0, 0.1f  ) ); // GameSettings.Instance.uiEntityMoveTweenDuration
+		sequance.AppendCallback( levelRevealedEvent.Raise );
 
 		levelCountText.textRenderer.text = "Level " + CurrentLevelData.Instance.currentConsecutiveLevel;
 	}

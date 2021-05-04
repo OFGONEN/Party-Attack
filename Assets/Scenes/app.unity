@@ -164,6 +164,7 @@ MonoBehaviour:
   levelProgress: {fileID: 11400000, guid: 0184e6fd552c99e4b80f943bb5f300fe, type: 2}
   ultimateProgress: {fileID: 11400000, guid: 6b74c6fe1f618e5439fff59a41fc0a68, type: 2}
   defaultWeaponActivate: {fileID: 11400000, guid: f68bdf4c0f69cc6468fce841aef7a9de, type: 2}
+  levelCompleted: {fileID: 11400000, guid: 28d976b368abc004a924d98b1751a17d, type: 2}
 --- !u!4 &65826802
 Transform:
   m_ObjectHideFlags: 0
@@ -906,6 +907,7 @@ MonoBehaviour:
   levelLoadingProgressImage: {fileID: 1066566744}
   levelCountText: {fileID: 592177424}
   levelProgressImage: {fileID: 1324857093}
+  levelRevealedEvent: {fileID: 11400000, guid: be5502ede7f194b4cad32082aa9196eb, type: 2}
 --- !u!1 &1045181634
 GameObject:
   m_ObjectHideFlags: 0
