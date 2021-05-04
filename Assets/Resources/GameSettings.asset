@@ -28,11 +28,11 @@ MonoBehaviour:
   camera_RotationVector: {x: 0, y: 15, z: 0}
   weapon_water_fireRate: 0.15
   weapon_fart_fireRate: 1
-  projectile_Speed: 20
+  projectile_Speed: 25
   projectile_fart_radius: 2
   projectile_fart_delay: 1
   projectile_target_triggerLayer: 3
-  projectile_beachBall_force: 100
+  projectile_beachBall_force: 50
   projectile_beachBall_explosion_force: 500
   projectile_beachBall_explosion_radius: 50
   projectile_beachBall_explosion_upwardsModifier: 10
