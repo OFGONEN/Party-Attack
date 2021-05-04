@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
 	#region Fields
 	[Header( "Event Listeners" )]
 	public EventListenerDelegateResponse levelLoadedListener;
+	public EventListenerDelegateResponse levelRevealedListener;
 	public EventListenerDelegateResponse humanNeutralizedListener;
 	public EventListenerDelegateResponse ultimateProgressListener;
 	public EventListenerDelegateResponse ultimateUsedListener;
@@ -36,6 +37,7 @@ public class LevelManager : MonoBehaviour
 	private void OnEnable()
     {
 		levelLoadedListener     .OnEnable();
+		levelRevealedListener   .OnEnable();
 		ultimateUsedListener    .OnEnable();
 		humanNeutralizedListener.OnEnable();
 		ultimateProgressListener.OnEnable();
@@ -44,6 +46,7 @@ public class LevelManager : MonoBehaviour
     private void OnDisable()
     {
 		levelLoadedListener     .OnDisable();
+		levelRevealedListener   .OnDisable();
 		ultimateUsedListener    .OnDisable();
 		humanNeutralizedListener.OnDisable();
 		ultimateProgressListener.OnDisable();
@@ -55,6 +58,7 @@ public class LevelManager : MonoBehaviour
 
 		levelLoadedListener.response      = LevelLoadedResponse;
 		ultimateUsedListener.response 	  = UltimateUsedResponse;
+		levelRevealedListener.response    = defaultWeaponActivate.Raise;
 		humanNeutralizedListener.response = HumanNeutralizedResponse;
 		ultimateProgressListener.response = UltimateProgressResponse;
 	}
@@ -76,8 +80,6 @@ public class LevelManager : MonoBehaviour
 			Destroy( currentCamera );
 
 		currentCamera = Instantiate( CurrentLevelData.Instance.levelData.cameraPrefab, transform );
-
-		defaultWeaponActivate.Raise();
 	}
 
     void HumanNeutralizedResponse()
