@@ -14,6 +14,7 @@ public class Weapon : MonoBehaviour
 
 
 	[Header( "Shooting" )]
+	public IntGameEvent fireEvent;
 	public SharedReferenceProperty shootOriginReferance;
 	public SharedReferenceProperty mainCameraReferance;
 	public ProjectileStack projectileStack;
@@ -78,6 +79,9 @@ public class Weapon : MonoBehaviour
 			return;
 
 		ammoCount--;
+
+		fireEvent.eventValue = ammoCount;
+		fireEvent.Raise();
 
 		RaycastHit hit;
 		Ray ray = mainCamera.ScreenPointToRay( Input.mousePosition );
@@ -147,6 +151,9 @@ public class Weapon : MonoBehaviour
 				ammoCount = CurrentLevelData.Instance.levelData.weapon_fart_ammoCount;
 				break;
 		}
+
+		fireEvent.eventValue = ammoCount;
+		fireEvent.Raise();
 	}
 	#endregion
 }
