@@ -5335,6 +5335,7 @@ GameObject:
   - component: {fileID: 3156027098359152533}
   - component: {fileID: 3146687122963827519}
   - component: {fileID: 3138960728708455561}
+  - component: {fileID: 3160354577334257362}
   m_Layer: 0
   m_Name: SM_Bld_LandingPad_01
   m_TagString: Untagged
@@ -5342,6 +5343,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!64 &3160354577334257362
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3160354577334257361}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 81952299d90432a48889398dd6954dc5, type: 3}
 --- !u!1001 &8038453648662803349
 PrefabInstance:
   m_ObjectHideFlags: 0
