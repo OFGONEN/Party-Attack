@@ -30,6 +30,7 @@ public class UIManager : MonoBehaviour
 
 	[Header( "Fired Events" )]
 	public GameEvent levelRevealedEvent;
+	public GameEvent loadNewLevelEvent;
 
 
 	#endregion
@@ -87,6 +88,8 @@ public class UIManager : MonoBehaviour
 		sequance.AppendCallback( () => tapInputListener.response = StartLevel );
 
 		levelCountText.textRenderer.text = "Level " + CurrentLevelData.Instance.currentConsecutiveLevel;
+
+		levelLoadedResponse.response = NewLevelLoaded;
 	}
 
 	void LevelCompleteResponse()
@@ -105,17 +108,44 @@ public class UIManager : MonoBehaviour
 		sequence.Append( tween );
 		sequence.Append( foreGroundImage.DOFade( 0.5f, 0.1f ) );
 		sequence.Append( informationText.GoPopOut() );
+		sequence.AppendCallback( () => tapInputListener.response = LoadNewLevel );
 		// sequence.Join( informationText.GoPopOut() );
 
 	}
 
+	void NewLevelLoaded()
+	{
+		levelCountText.textRenderer.text = "Level " + CurrentLevelData.Instance.currentConsecutiveLevel;
+
+		var sequence = DOTween.Sequence();
+
+		sequence.Append( foreGroundImage.DOFade( 0, 0.1f ) );
+		sequence.Append( weaponButtons[ 0 ].GoStartPosition() );
+		sequence.Join( weaponButtons[ 1 ].GoStartPosition() );
+		sequence.Join( weaponButtons[ 2 ].GoStartPosition() );
+		sequence.AppendCallback( levelRevealedEvent.Raise );
+	}
+
 	void StartLevel()
 	{
-		FFLogger.Log( "Start Level" );
 		foreGroundImage.DOFade( 0, 0.1f );
 		informationText.GoPopIn().OnComplete( levelRevealedEvent.Raise );
 
 		tapInputListener.response = ExtensionMethods.EmptyMethod;
 	}
+
+	void LoadNewLevel()
+	{
+		FFLogger.Log( "Load New Level" );
+		tapInputListener.response = ExtensionMethods.EmptyMethod;
+
+		var sequence = DOTween.Sequence();
+
+		sequence.Append( foreGroundImage.DOFade( 1f, 0.1f ) );
+		sequence.Join( informationText.GoPopIn() );
+		sequence.AppendCallback( loadNewLevelEvent.Raise );
+	}
+
+
     #endregion
 }

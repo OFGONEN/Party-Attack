@@ -1256,6 +1256,7 @@ MonoBehaviour:
   - {fileID: 1686222007}
   - {fileID: 1964082238}
   levelRevealedEvent: {fileID: 11400000, guid: be5502ede7f194b4cad32082aa9196eb, type: 2}
+  loadNewLevelEvent: {fileID: 11400000, guid: f21048912f45f4f4ba5088a96779eb2f, type: 2}
 --- !u!1 &1045181634
 GameObject:
   m_ObjectHideFlags: 0

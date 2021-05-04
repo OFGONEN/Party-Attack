@@ -61,7 +61,6 @@ public class LevelManager : MonoBehaviour
 		ultimateUsedListener.response 	  = UltimateUsedResponse;
 		levelRevealedListener.response    = defaultWeaponActivate.Raise;
 		humanNeutralizedListener.response = HumanNeutralizedResponse;
-		ultimateProgressListener.response = UltimateProgressResponse;
 	}
 
 	#endregion
@@ -73,6 +72,8 @@ public class LevelManager : MonoBehaviour
 		neutralizedHumanCount = 0;
 		levelProgress.SetValue( 0 );
 		ultimateProgress.SetValue( 0 );
+
+		ultimateProgressListener.response = UltimateProgressResponse;
 
 		// Spawn camera and set skybox
 		RenderSettings.skybox = CurrentLevelData.Instance.levelData.skyboxMaterial;
