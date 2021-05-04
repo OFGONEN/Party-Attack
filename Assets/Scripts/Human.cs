@@ -54,6 +54,7 @@ public class Human : MonoBehaviour
 	private Puppet.Dancer dancer;
     
 	private Tween switchToDancingUponReachingTargetTween;
+	private Tween delayedRagdollTurnOffCall;
 	private bool willJump = false;
 	private bool jumpIsAllowed = false;
 #endregion
@@ -81,6 +82,11 @@ public class Human : MonoBehaviour
     {
 		CancelSwitchToDancingUponReachingTargetTween();
 		SpawnedBefore = true;
+
+		if(delayedRagdollTurnOffCall != null && delayedRagdollTurnOffCall.IsActive())
+		{
+			delayedRagdollTurnOffCall.Kill();
+		}
 	}
     
     private void Start()
@@ -128,15 +134,15 @@ public class Human : MonoBehaviour
 		humanNeutralized.Raise();
 
 		/* Turn ragdoll off after a pre-determined time passes, IF the character is still resting on Play Area (Y = 0). */
-		DOVirtual.DelayedCall( GameSettings.Instance.human.ragdollTurnoffTime,
-							   () =>
-								{
-									if( Mathf.Approximately( transform.position.y, 0 ) ) // Still on the Play Area.
+		delayedRagdollTurnOffCall = DOVirtual.DelayedCall( GameSettings.Instance.human.ragdollTurnoffTime,
+							   	() =>
 									{
-										ragdoll.Toggle( false );
-										CurrentState = State.Neutralized_Stationary;
-									}
-								} );
+										if( Mathf.Approximately( transform.position.y, 0 ) ) // Still on the Play Area.
+										{
+											ragdoll.Toggle( false );
+											CurrentState = State.Neutralized_Stationary;
+										}
+									} ).OnComplete(() => delayedRagdollTurnOffCall = null);
 	}
 
 	public void RunFrom( Vector3 fromThisPosition )
