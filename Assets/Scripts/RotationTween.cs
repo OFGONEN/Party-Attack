@@ -11,8 +11,8 @@ namespace FFStudio
 #region Fields
         public enum RotationMode { Local, World }
 
-        [ Range( 0, 360 ), Label( "Target Angle (°)" )]
-        public float targetAngle;
+        [ Range( 0, 360 ), Label( "Delta Angle (°)" )]
+        public float deltaAngle;
         [ Label( "Angular Speed (°/s)" ) ]
         public float angularSpeedInDegrees;
         
@@ -27,7 +27,7 @@ namespace FFStudio
         public RotationMode rotationMode;
 
         [ Dropdown( "GetVectorValues" ), Label( "Rotate Around" ) ]
-        public Vector3 rotationVector;
+        public Vector3 rotationAxisMaskVector;
 
         public Ease easing = Ease.Linear;
 
@@ -118,17 +118,19 @@ namespace FFStudio
 
 #region Implementation
         private void CreateAndStartTween()
-        {            
-            if( rotationMode == RotationMode.Local )
-                tween = transform.DOLocalRotate( rotationVector * targetAngle, Duration, RotateMode.FastBeyond360 );
+        {
+			/* Since we use SetRelative + RotateMode.FastBeyond360 combo, we need to specify a delta instead of end value. */
+
+			if( rotationMode == RotationMode.Local )
+                tween = transform.DOLocalRotate( rotationAxisMaskVector * deltaAngle, Duration, RotateMode.FastBeyond360 );
             else
-                tween = transform.DORotate( rotationVector * targetAngle, Duration, RotateMode.FastBeyond360 );
+                tween = transform.DORotate( rotationAxisMaskVector * deltaAngle, Duration, RotateMode.FastBeyond360 );
                 
             tween.SetRelative()
-                .SetEase( easing )
-                .SetLoops( loop ? -1 : 0, loopType )
-                .OnComplete( () => IsPlaying = false )
-                .OnComplete( KillTween );
+                 .SetEase( easing )
+                 .SetLoops( loop ? -1 : 0, loopType )
+                 .OnComplete( () => IsPlaying = false )
+                 .OnComplete( KillTween );
                 
             for( var i = 0; i < fireTheseOnComplete.Length; i++ )
                 tween.OnComplete( fireTheseOnComplete[ i ].Raise );
