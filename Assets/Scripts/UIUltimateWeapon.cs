@@ -29,12 +29,16 @@ public class UIUltimateWeapon : UIEntity
 	{
 		ultimateEnabledListener.OnEnable();
 		ultimateUsedListener.OnEnable();
+
+		ultimateProgressProperty.changeEvent += ProgressChangeResponse;
 	}
 
 	private void OnDisable()
 	{
 		ultimateEnabledListener.OnDisable();
 		ultimateUsedListener.OnDisable();
+		
+		ultimateProgressProperty.changeEvent -= ProgressChangeResponse;
 	}
 
 	private void Awake()
@@ -45,9 +49,7 @@ public class UIUltimateWeapon : UIEntity
 		progressImage.fillAmount = 0;
 
 		ultimateEnabledListener.response = () => selectionButton.interactable = true;
-		ultimateProgressProperty.changeEvent += ProgressChangeResponse;
-
-		ultimateUsedListener.response = UltimateUsedResponse;
+		ultimateUsedListener.response    = UltimateUsedResponse;
 	}
 	#endregion
 
