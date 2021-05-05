@@ -139,11 +139,13 @@ public class Human : MonoBehaviour
 		delayedRagdollTurnOffCall = DOVirtual.DelayedCall( GameSettings.Instance.human.ragdollTurnoffTime,
 							   	() =>
 									{
-										if( Mathf.Approximately( transform.position.y, 0 ) ) // Still on the Play Area.
-										{
-											ragdoll.Toggle( false );
-											CurrentState = State.Neutralized_Stationary;
-										}
+										gameObject.SetActive( false );										
+
+										// if( Mathf.Approximately( transform.position.y, 0 ) ) // Still on the Play Area.
+										// {
+										// 	ragdoll.Toggle( false );
+										// 	CurrentState = State.Neutralized_Stationary;
+										// }
 									} ).OnComplete(() => delayedRagdollTurnOffCall = null);
 	}
 
