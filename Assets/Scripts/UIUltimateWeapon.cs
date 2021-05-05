@@ -56,7 +56,7 @@ public class UIUltimateWeapon : UIEntity
 	#region Implementation
 	void ProgressChangeResponse()
 	{
-		progressText.text = "%" + ultimateProgressProperty.sharedValue;
+		progressText.text = "%" + (int) ultimateProgressProperty.sharedValue ;
 		progressImage.fillAmount = ultimateProgressProperty.sharedValue / 100f;
 	}
 
