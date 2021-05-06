@@ -56,11 +56,13 @@ public class UIWeapon : UIEntity
 	public void Activated()
 	{
 		weaponImage.sprite = weaponSprites[ 1 ];
+		uiTransform.localScale = Vector3.one * 1.1f;
 	}
 
 	public void DisActivated()
 	{
 		weaponImage.sprite = weaponSprites[ 0 ];
+		uiTransform.localScale = Vector3.one;
 	}
 	#endregion
 
