@@ -23,6 +23,12 @@ TextureImporter:
   - first:
       213: -7921052967969465774
     second: spritesheet_6
+  - first:
+      213: -1370661682523340017
+    second: tapToSwitch
+  - first:
+      213: -8276262488406422588
+    second: hand
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -278,6 +284,48 @@ TextureImporter:
       bones: []
       spriteID: 25a502d0b44c21290800000000000000
       internalID: -7921052967969465774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tapToSwitch
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 867
+        width: 224
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0305f9367e6afce0800000000000000
+      internalID: -1370661682523340017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hand
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 746
+        width: 89
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cb05a6cd1fc42d80800000000000000
+      internalID: -8276262488406422588
       vertices: []
       indices: 
       edges: []

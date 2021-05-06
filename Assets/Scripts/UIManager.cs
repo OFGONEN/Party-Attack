@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
 	public UIText levelCountText;
 	public UIImage levelProgressImage;
 	public Image foreGroundImage;
+	public RectTransform tutorialObjects;
 
 	public UIEntity[] weaponButtons;
 
@@ -158,6 +159,7 @@ public class UIManager : MonoBehaviour
 	{
 		foreGroundImage.DOFade( 0, 0.1f );
 		informationText.GoPopIn().OnComplete( levelRevealedEvent.Raise );
+		tutorialObjects.gameObject.SetActive( false );
 
 		tapInputListener.response = ExtensionMethods.EmptyMethod;
 	}
