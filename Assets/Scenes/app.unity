@@ -2310,6 +2310,7 @@ MonoBehaviour:
     gameEvent: {fileID: 11400000, guid: 08b9079fb856230459ba418b28981185, type: 2}
   ammoEventListener:
     gameEvent: {fileID: 11400000, guid: 40ec43fbebbca974eaea55cc73537e83, type: 2}
+  ammoDepleted: {fileID: 11400000, guid: d670b6ea740fa0e4a9601e138c98bf46, type: 2}
   ammoCountText: {fileID: 681068220}
   weaponImage: {fileID: 1686222005}
   weaponSprites:
@@ -2976,6 +2977,7 @@ MonoBehaviour:
     gameEvent: {fileID: 11400000, guid: 08b9079fb856230459ba418b28981185, type: 2}
   ammoEventListener:
     gameEvent: {fileID: 11400000, guid: ae379878421d6f949a31a04cc499f68e, type: 2}
+  ammoDepleted: {fileID: 11400000, guid: d670b6ea740fa0e4a9601e138c98bf46, type: 2}
   ammoCountText: {fileID: 1876503433}
   weaponImage: {fileID: 2093235479}
   weaponSprites:

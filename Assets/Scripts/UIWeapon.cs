@@ -13,6 +13,10 @@ public class UIWeapon : UIEntity
 	public EventListenerDelegateResponse ammoEventListener;
 	// public MultipleEventListenerDelegateResponse disactivateWeaponListener;
 
+
+	[Header( "Fired Events" )]
+	public GameEvent ammoDepleted;
+
 	[Header( "UI Elements" )]
 	public TextMeshProUGUI ammoCountText;
 	public Image weaponImage;
@@ -66,7 +70,10 @@ public class UIWeapon : UIEntity
 		ammoCountText.text = ammoEvent.eventValue.ToString();
 
         if(ammoEvent.eventValue == 0)
+		{
 			selectionButton.interactable = false;
+			ammoDepleted.Raise();
+		}
 
 	}
     #endregion
