@@ -61,7 +61,7 @@ public class BeachBallWeapon : MonoBehaviour
 
 		rayCastLayerMask = LayerMask.GetMask( "Raycast-Only");
 
-		crosshair.gameObject.SetActive( false );
+		crosshair.SetActive( false );
 		beachBall.gameObject.SetActive( false );
 	}
 	#endregion
@@ -72,7 +72,7 @@ public class BeachBallWeapon : MonoBehaviour
 		aimInputListener.response = Aim;
 		fireInputListener.response = Shoot;
 		crosshair.transform.position = shooterTransform.position;
-		crosshair.gameObject.SetActive( true );
+		crosshair.SetActive( true );
 
 		activateEvent.Invoke();
 	}

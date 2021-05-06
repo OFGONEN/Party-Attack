@@ -24,6 +24,7 @@ public class Weapon : MonoBehaviour
 	public SharedReferenceProperty mainCameraReferance;
 	public ProjectileStack projectileStack;
 	public WeaponType weaponType;
+	public Transform crosshair;
 
 
 	// Private Fields
@@ -66,6 +67,9 @@ public class Weapon : MonoBehaviour
 		CreateProjectileStack();
 
 		rayCastLayerMask = LayerMask.GetMask("Raycast-Only", "Net" );
+
+		crosshair.gameObject.SetActive( false );
+
 	}
 	#endregion
 
@@ -74,11 +78,17 @@ public class Weapon : MonoBehaviour
     {
 		inputListener.response = Shoot;
 		activateEvent.Invoke();
+
+		crosshair.position = Vector3.down * 100;
+		crosshair.gameObject.SetActive( true );
 	}
 	void DisActivateWeapon()
     {
 		inputListener.response = ExtensionMethods.EmptyMethod;
 		disActivateEvent.Invoke();
+
+
+		crosshair.gameObject.SetActive( false );
 	}
 	void Shoot()
     {
@@ -95,6 +105,10 @@ public class Weapon : MonoBehaviour
 
 		if( Physics.Raycast( ray, out hit, 200, rayCastLayerMask ) )
 		{
+			var position = hit.point;
+			position.y += 0.25f;
+			crosshair.position = position;
+
 			// get a projectile
 			var projectile = GiveProjectile();
 
