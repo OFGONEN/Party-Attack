@@ -18,13 +18,13 @@ public class FartBombProjectile : Projectile
 
 		gameObject.SetActive( false );
 
-		var hits = Physics.OverlapSphere( transform.position, GameSettings.Instance.projectile_fart_radius, 1 << GameSettings.Instance.projectile_target_triggerLayer /* Human Layer Mask */);
-
-		DOVirtual.DelayedCall( GameSettings.Instance.projectile_fart_delay, () => MakeHumansRun( hits ) );
+		DOVirtual.DelayedCall( GameSettings.Instance.projectile_fart_delay, MakeHumansRun );
 	}
 
-	void MakeHumansRun( Collider[] hits )
+	void MakeHumansRun()
 	{
+		var hits = Physics.OverlapSphere( transform.position, GameSettings.Instance.projectile_fart_radius, 1 << GameSettings.Instance.projectile_target_triggerLayer /* Human Layer Mask */);
+
 		foreach ( var hit in hits )
         {
 			var human = hit.GetComponentInParent<Human>();
