@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FFStudio;
+using DG.Tweening;
 using NaughtyAttributes;
 
 public class LevelManager : MonoBehaviour
@@ -13,9 +14,11 @@ public class LevelManager : MonoBehaviour
 	public EventListenerDelegateResponse humanNeutralizedListener;
 	public EventListenerDelegateResponse ultimateProgressListener;
 	public EventListenerDelegateResponse ultimateUsedListener;
+	public EventListenerDelegateResponse ammoDepletedListener;
 
 	[Header( "Level Releated" )]
 	public GameEvent ultimateUnlocked;
+	public GameEvent levelFailedEvent;
 
 	[Header( "Level Releated" )]
 	public SharedFloatProperty levelProgress;
@@ -31,6 +34,8 @@ public class LevelManager : MonoBehaviour
 	int humanCount;
 	int neutralizedHumanCount;
 	FloatGameEvent ultimateProgressEvent;
+	int depletedWeaponCount = 0;
+	Tween levelFailCheckTween;
 	#endregion
 
 	#region UnityAPI
@@ -40,6 +45,7 @@ public class LevelManager : MonoBehaviour
 		levelLoadedListener     .OnEnable();
 		levelRevealedListener   .OnEnable();
 		ultimateUsedListener    .OnEnable();
+		ammoDepletedListener	.OnEnable();
 		humanNeutralizedListener.OnEnable();
 		ultimateProgressListener.OnEnable();
 	}
@@ -49,6 +55,7 @@ public class LevelManager : MonoBehaviour
 		levelLoadedListener     .OnDisable();
 		levelRevealedListener   .OnDisable();
 		ultimateUsedListener    .OnDisable();
+		ammoDepletedListener	.OnDisable();
 		humanNeutralizedListener.OnDisable();
 		ultimateProgressListener.OnDisable();
     }
@@ -59,6 +66,7 @@ public class LevelManager : MonoBehaviour
 
 		levelLoadedListener.response      = LevelLoadedResponse;
 		ultimateUsedListener.response 	  = UltimateUsedResponse;
+		ammoDepletedListener.response     = AmmoDepletedResponse;
 		levelRevealedListener.response    = defaultWeaponActivate.Raise;
 		humanNeutralizedListener.response = HumanNeutralizedResponse;
 	}
@@ -70,10 +78,12 @@ public class LevelManager : MonoBehaviour
     {
 		humanCount = CurrentLevelData.Instance.levelData.humanCount;
 		neutralizedHumanCount = 0;
+		depletedWeaponCount = 0;
 		levelProgress.SetValue( 0 );
 		ultimateProgress.SetValue( 0 );
 
 		ultimateProgressListener.response = UltimateProgressResponse;
+		ultimateUsedListener.response     = UltimateUsedResponse;
 
 		// Spawn camera and set skybox
 		RenderSettings.skybox = CurrentLevelData.Instance.levelData.skyboxMaterial;
@@ -91,6 +101,10 @@ public class LevelManager : MonoBehaviour
 
         if(neutralizedHumanCount == humanCount)
 		{
+			if(levelFailCheckTween != null)
+				levelFailCheckTween.Kill();
+
+			levelFailCheckTween = null;
 			levelCompleted.Raise();
 			deactivateAllWeapon.Raise();
 		}
@@ -113,5 +127,30 @@ public class LevelManager : MonoBehaviour
 		ultimateProgressListener.response = UltimateProgressResponse;
 	}
 
+	void UltimateUsedAmmoDepleted()
+	{
+		ultimateProgress.sharedValue = 0;
+		ultimateProgressListener.response = UltimateProgressResponse;
+
+		levelFailCheckTween = DOVirtual.DelayedCall( 3, levelFailedEvent.Raise ).OnComplete(() => levelFailCheckTween = null);
+	}
+
+	void AmmoDepletedResponse()
+	{
+		depletedWeaponCount++;
+
+		if(depletedWeaponCount >= 2)
+		{
+			if(ultimateProgress.sharedValue >= 100)
+			{
+				ultimateUsedListener.response = UltimateUsedAmmoDepleted;
+			}
+			else 
+			{
+				FFLogger.Log( "Level failed" );
+				DOVirtual.DelayedCall( 3, levelFailedEvent.Raise );
+			}
+		}
+	}
 	#endregion
 }

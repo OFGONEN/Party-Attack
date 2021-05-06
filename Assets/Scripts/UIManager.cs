@@ -136,7 +136,7 @@ public class UIManager : MonoBehaviour
 		sequence.Append( tween );
 		sequence.Append( foreGroundImage.DOFade( 0.5f, 0.1f ) );
 		sequence.Append( informationText.GoPopOut() );
-		sequence.AppendCallback( () => tapInputListener.response = LoadNewLevel );
+		sequence.AppendCallback( () => tapInputListener.response = Resetlevel );
 		// sequence.Join( informationText.GoPopOut() );
 
 	}
@@ -176,7 +176,7 @@ public class UIManager : MonoBehaviour
 
 	void Resetlevel()
 	{
-		FFLogger.Log( "Load New Level" );
+		FFLogger.Log( "Reset Level" );
 		tapInputListener.response = ExtensionMethods.EmptyMethod;
 
 		var sequence = DOTween.Sequence();
