@@ -1297,6 +1297,8 @@ MonoBehaviour:
     gameEvent: {fileID: 11400000, guid: 08b9079fb856230459ba418b28981185, type: 2}
   levelCompleteResponse:
     gameEvent: {fileID: 11400000, guid: 28d976b368abc004a924d98b1751a17d, type: 2}
+  levelFailResponse:
+    gameEvent: {fileID: 11400000, guid: ec850936269bc2e47b26cfebd8bdad97, type: 2}
   tapInputListener:
     gameEvent: {fileID: 11400000, guid: 182cfa2632cfdba49bfaf3471d114d23, type: 2}
   levelLoadingProgressProperty: {fileID: 11400000, guid: c1776bd86a2ed144eb0d5748ff3dcac7, type: 2}
@@ -1313,6 +1315,7 @@ MonoBehaviour:
   - {fileID: 1964082238}
   levelRevealedEvent: {fileID: 11400000, guid: be5502ede7f194b4cad32082aa9196eb, type: 2}
   loadNewLevelEvent: {fileID: 11400000, guid: f21048912f45f4f4ba5088a96779eb2f, type: 2}
+  resetLevelEvent: {fileID: 11400000, guid: 0a3e52cd505ecfc4ba9ef153d4f3ba93, type: 2}
 --- !u!1 &1045181634
 GameObject:
   m_ObjectHideFlags: 0

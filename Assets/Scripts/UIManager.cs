@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using FFStudio;
 using DG.Tweening;
+using NaughtyAttributes;
 
 public class UIManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class UIManager : MonoBehaviour
 	[Header( "Event Listeners" )]
 	public EventListenerDelegateResponse levelLoadedResponse;
 	public EventListenerDelegateResponse levelCompleteResponse;
+	public EventListenerDelegateResponse levelFailResponse;
 	public EventListenerDelegateResponse tapInputListener;
 
 	[Header ("Shared Variables")]
@@ -31,6 +33,7 @@ public class UIManager : MonoBehaviour
 	[Header( "Fired Events" )]
 	public GameEvent levelRevealedEvent;
 	public GameEvent loadNewLevelEvent;
+	public GameEvent resetLevelEvent;
 
 
 	#endregion
@@ -42,9 +45,10 @@ public class UIManager : MonoBehaviour
 		levelLoadingProgressProperty.changeEvent += LevelLoadingProgressResponse;
 		levelProgressProperty.changeEvent        += LevelProgressResponse;
 
-		levelLoadedResponse.OnEnable();
+		levelLoadedResponse  .OnEnable();
+		levelFailResponse    .OnEnable();
 		levelCompleteResponse.OnEnable();
-		tapInputListener.OnEnable();
+		tapInputListener     .OnEnable();
 	}
 
     private void OnDisable()
@@ -52,16 +56,18 @@ public class UIManager : MonoBehaviour
 		levelLoadingProgressProperty.changeEvent -= LevelLoadingProgressResponse;
 		levelProgressProperty.changeEvent        -= LevelProgressResponse;
 
-		levelLoadedResponse.OnDisable();
+		levelLoadedResponse  .OnDisable();
+		levelFailResponse    .OnDisable();
 		levelCompleteResponse.OnDisable();
-		tapInputListener.OnDisable();
+		tapInputListener     .OnDisable();
 	}
 
     private void Awake()
     {
 		levelLoadedResponse.response   = LevelLoadedResponse;
+		levelFailResponse.response     = LevelFailResponse;
 		levelCompleteResponse.response = LevelCompleteResponse;
-		tapInputListener.response = ExtensionMethods.EmptyMethod;
+		tapInputListener.response      = ExtensionMethods.EmptyMethod;
 
 		informationText.textRenderer.text = "Tap to Shoot";
 	}
@@ -113,6 +119,28 @@ public class UIManager : MonoBehaviour
 
 	}
 
+	[Button]
+	void LevelFailResponse()
+	{
+		var sequence = DOTween.Sequence();
+
+		Tween tween = null;
+
+		foreach( var item in weaponButtons )
+		{
+			tween = item.GoTargetPosition();
+		}
+
+		informationText.textRenderer.text = "Level Failed \n\n Tap to Contiune";
+
+		sequence.Append( tween );
+		sequence.Append( foreGroundImage.DOFade( 0.5f, 0.1f ) );
+		sequence.Append( informationText.GoPopOut() );
+		sequence.AppendCallback( () => tapInputListener.response = LoadNewLevel );
+		// sequence.Join( informationText.GoPopOut() );
+
+	}
+
 	void NewLevelLoaded()
 	{
 		levelCountText.textRenderer.text = "Level " + CurrentLevelData.Instance.currentConsecutiveLevel;
@@ -144,6 +172,19 @@ public class UIManager : MonoBehaviour
 		sequence.Append( foreGroundImage.DOFade( 1f, 0.1f ) );
 		sequence.Join( informationText.GoPopIn() );
 		sequence.AppendCallback( loadNewLevelEvent.Raise );
+	}
+
+	void Resetlevel()
+	{
+		FFLogger.Log( "Load New Level" );
+		tapInputListener.response = ExtensionMethods.EmptyMethod;
+
+		var sequence = DOTween.Sequence();
+
+		sequence.Append( foreGroundImage.DOFade( 1f, 0.1f ) );
+		sequence.Join( informationText.GoPopIn() );
+		sequence.AppendCallback( resetLevelEvent.Raise );
+
 	}
 
 
