@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using FFStudio;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BeachBallWeapon : MonoBehaviour
 {
@@ -11,6 +12,11 @@ public class BeachBallWeapon : MonoBehaviour
 	public EventListenerDelegateResponse fireInputListener;
 	public EventListenerDelegateResponse activateWeaponListener;
 	public MultipleEventListenerDelegateResponse disActivateWeaponListener;
+
+	[Header( "UI Interaction" )]
+	public UnityEvent activateEvent;
+	public UnityEvent disActivateEvent;
+
 
 	[Header( "Shooting" )]
 	public SharedReferenceProperty shootOriginReferance;
@@ -67,12 +73,16 @@ public class BeachBallWeapon : MonoBehaviour
 		fireInputListener.response = Shoot;
 		crosshair.transform.position = shooterTransform.position;
 		crosshair.gameObject.SetActive( true );
+
+		activateEvent.Invoke();
 	}
 	void DisActivateWeapon()
 	{
 		aimInputListener.response = ExtensionMethods.EmptyMethod;
 		fireInputListener.response = ExtensionMethods.EmptyMethod;
 		crosshair.gameObject.SetActive( false );
+
+		disActivateEvent.Invoke();
 	}
 
     void Aim()

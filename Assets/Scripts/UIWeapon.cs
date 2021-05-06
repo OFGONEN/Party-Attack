@@ -15,6 +15,9 @@ public class UIWeapon : UIEntity
 
 	[Header( "UI Elements" )]
 	public TextMeshProUGUI ammoCountText;
+	public Image weaponImage;
+
+	public Sprite[] weaponSprites; // 0 = disactivate, 1 = activate
 
 	// Private Fields
 	private IntGameEvent ammoEvent;
@@ -45,6 +48,18 @@ public class UIWeapon : UIEntity
 	}
     #endregion
 
+	#region API
+	public void Activated()
+	{
+		weaponImage.sprite = weaponSprites[ 1 ];
+	}
+
+	public void DisActivated()
+	{
+		weaponImage.sprite = weaponSprites[ 0 ];
+	}
+	#endregion
+
     #region Implementation
     void SetAmmoCount()
     {
@@ -54,6 +69,5 @@ public class UIWeapon : UIEntity
 			selectionButton.interactable = false;
 
 	}
-        
     #endregion
 }

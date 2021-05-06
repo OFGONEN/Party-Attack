@@ -20,6 +20,8 @@ public class UIUltimateWeapon : UIEntity
 	public TextMeshProUGUI progressText;
 	public Image progressImage;
 
+	public Sprite[] weaponSprites;
+
 	// Private Fields
 	private Button selectionButton;
 	#endregion
@@ -50,6 +52,18 @@ public class UIUltimateWeapon : UIEntity
 
 		ultimateEnabledListener.response = () => selectionButton.interactable = true;
 		ultimateUsedListener.response    = UltimateUsedResponse;
+	}
+	#endregion
+
+	#region API
+	public void Activated()
+	{
+		progressImage.sprite = weaponSprites[ 1 ];
+	}
+
+	public void DisActivated()
+	{
+		progressImage.sprite = weaponSprites[ 0 ];
 	}
 	#endregion
 

@@ -237,7 +237,9 @@ public class Human : MonoBehaviour
 	
 	protected void CancelSwitchToDancingUponReachingTargetTween()
 	{
-		switchToDancingUponReachingTargetTween.Kill();
+		if(switchToDancingUponReachingTargetTween != null)
+			switchToDancingUponReachingTargetTween.Kill();
+
 		switchToDancingUponReachingTargetTween = null;
 	}
 

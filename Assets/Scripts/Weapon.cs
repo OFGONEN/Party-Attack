@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using FFStudio;
 
 public class Weapon : MonoBehaviour
@@ -11,6 +12,10 @@ public class Weapon : MonoBehaviour
 	public EventListenerDelegateResponse activateWeaponListener;
 	public EventListenerDelegateResponse levelLoadedListener;
 	public MultipleEventListenerDelegateResponse disActivateWeaponListener;
+
+	[Header( "UI Interaction" )]
+	public UnityEvent activateEvent;
+	public UnityEvent disActivateEvent;
 
 
 	[Header( "Shooting" )]
@@ -68,10 +73,12 @@ public class Weapon : MonoBehaviour
 	void ActivateWeapon()
     {
 		inputListener.response = Shoot;
+		activateEvent.Invoke();
 	}
 	void DisActivateWeapon()
     {
 		inputListener.response = ExtensionMethods.EmptyMethod;
+		disActivateEvent.Invoke();
 	}
 	void Shoot()
     {
