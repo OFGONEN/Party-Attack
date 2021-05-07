@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ea3c0b9fd00fd441b6cebc5941ee13b, type: 3}
   m_Name: LevelData_3
   m_EditorClassIdentifier: 
-  sceneIndex: 3
+  sceneIndex: 4
   isGroundLevel: 0
   humanCount: 15
   cameraPrefab: {fileID: 1780122578631515461, guid: e44fea96232f26c4b9c93855f887a435, type: 3}

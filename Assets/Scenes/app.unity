@@ -1305,7 +1305,7 @@ GameObject:
   - component: {fileID: 912509283}
   - component: {fileID: 912509287}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: canvas_uimanager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1434,6 +1434,7 @@ MonoBehaviour:
   levelRevealedEvent: {fileID: 11400000, guid: be5502ede7f194b4cad32082aa9196eb, type: 2}
   loadNewLevelEvent: {fileID: 11400000, guid: f21048912f45f4f4ba5088a96779eb2f, type: 2}
   resetLevelEvent: {fileID: 11400000, guid: 0a3e52cd505ecfc4ba9ef153d4f3ba93, type: 2}
+  elephantLevelEvent: {fileID: 11400000, guid: 8b339ffdef21b4f40b2089d510c9927c, type: 2}
 --- !u!1 &1045181634
 GameObject:
   m_ObjectHideFlags: 0

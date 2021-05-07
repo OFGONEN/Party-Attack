@@ -35,6 +35,7 @@ public class UIManager : MonoBehaviour
 	public GameEvent levelRevealedEvent;
 	public GameEvent loadNewLevelEvent;
 	public GameEvent resetLevelEvent;
+	public ElephantLevelEvent elephantLevelEvent;
 
 
 	#endregion
@@ -118,6 +119,9 @@ public class UIManager : MonoBehaviour
 		sequence.AppendCallback( () => tapInputListener.response = LoadNewLevel );
 		// sequence.Join( informationText.GoPopOut() );
 
+		elephantLevelEvent.level = CurrentLevelData.Instance.currentConsecutiveLevel;
+		elephantLevelEvent.elephantEventType = ElephantEvent.LevelCompleted;
+		elephantLevelEvent.Raise();
 	}
 
 	[Button]
@@ -140,6 +144,9 @@ public class UIManager : MonoBehaviour
 		sequence.AppendCallback( () => tapInputListener.response = Resetlevel );
 		// sequence.Join( informationText.GoPopOut() );
 
+		elephantLevelEvent.level = CurrentLevelData.Instance.currentConsecutiveLevel;
+		elephantLevelEvent.elephantEventType = ElephantEvent.LevelFailed;
+		elephantLevelEvent.Raise();
 	}
 
 	void NewLevelLoaded()
@@ -153,6 +160,10 @@ public class UIManager : MonoBehaviour
 		sequence.Join( weaponButtons[ 1 ].GoStartPosition() );
 		sequence.Join( weaponButtons[ 2 ].GoStartPosition() );
 		sequence.AppendCallback( levelRevealedEvent.Raise );
+
+		elephantLevelEvent.level = CurrentLevelData.Instance.currentConsecutiveLevel;
+		elephantLevelEvent.elephantEventType = ElephantEvent.LevelStarted;
+		elephantLevelEvent.Raise();
 	}
 
 	void StartLevel()
@@ -162,6 +173,10 @@ public class UIManager : MonoBehaviour
 		tutorialObjects.gameObject.SetActive( false );
 
 		tapInputListener.response = ExtensionMethods.EmptyMethod;
+
+		elephantLevelEvent.level = CurrentLevelData.Instance.currentConsecutiveLevel;
+		elephantLevelEvent.elephantEventType = ElephantEvent.LevelStarted;
+		elephantLevelEvent.Raise();
 	}
 
 	void LoadNewLevel()
@@ -187,6 +202,9 @@ public class UIManager : MonoBehaviour
 		sequence.Join( informationText.GoPopIn() );
 		sequence.AppendCallback( resetLevelEvent.Raise );
 
+		elephantLevelEvent.level = CurrentLevelData.Instance.currentConsecutiveLevel;
+		elephantLevelEvent.elephantEventType = ElephantEvent.LevelStarted;
+		elephantLevelEvent.Raise();
 	}
 
 
