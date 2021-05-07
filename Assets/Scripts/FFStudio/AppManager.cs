@@ -18,6 +18,9 @@ namespace FFStudio
 		public GameEvent levelLoaded;
 		public GameEvent cleanUpEvent;
 
+		[Header( "Fired Events" )]
+		public SharedFloatProperty levelProgress;
+
 		#endregion
 
 		#region Unity API
@@ -40,56 +43,63 @@ namespace FFStudio
 
 		private void Start()
 		{
-			LoadLevel();
+			StartCoroutine( LoadLevel() );
 		}
 		#endregion
 
 		#region API
 		public void ResetScene()
 		{
-			var operation = SceneManager.UnloadSceneAsync( CurrentLevelData.instance.levelData.sceneIndex ); // Unload current scene
+			var operation = SceneManager.UnloadSceneAsync( CurrentLevelData.Instance.levelData.sceneIndex ); // Unload current scene
 
 			cleanUpEvent.Raise();
 
 			// When unloading done load the same scene again
 			operation.completed += ( AsyncOperation operation ) =>
-			SceneManager.LoadScene( CurrentLevelData.instance.levelData.sceneIndex, LoadSceneMode.Additive );
+			SceneManager.LoadScene( CurrentLevelData.Instance.levelData.sceneIndex, LoadSceneMode.Additive );
 
 		}
 		#endregion
 
 		#region Implementation
-		/// <summary>
-		/// Same as ResetScene method but raises level loaded event
-		/// </summary>
-		public void ResetLevel()
+		private void ResetLevel()
 		{
 			ResetScene();
 
 			levelLoaded.Raise();
 		}
-		private void LoadLevel()
+		private IEnumerator LoadLevel()
 		{
-			CurrentLevelData.instance.currentLevel = PlayerPrefs.GetInt( "Level", 1 );
-			CurrentLevelData.instance.currentConsecutiveLevel = PlayerPrefs.GetInt( "Consecutive Level", 1 );
+			CurrentLevelData.Instance.currentLevel = PlayerPrefs.GetInt( "Level", 1 );
+			CurrentLevelData.Instance.currentConsecutiveLevel = PlayerPrefs.GetInt( "Consecutive Level", 1 );
 
-			CurrentLevelData.instance.LoadCurrentLevelData();
+			CurrentLevelData.Instance.LoadCurrentLevelData();
 
 			cleanUpEvent.Raise();
-			SceneManager.LoadScene( CurrentLevelData.instance.levelData.sceneIndex, LoadSceneMode.Additive );
+			// SceneManager.LoadScene( CurrentLevelData.Instance.levelData.sceneIndex, LoadSceneMode.Additive );
+			var operation = SceneManager.LoadSceneAsync( CurrentLevelData.Instance.levelData.sceneIndex, LoadSceneMode.Additive );
+
+			levelProgress.SetValue( 0 );
+
+			while( !operation.isDone )
+			{
+				yield return null;
+
+				levelProgress.SetValue( operation.progress );
+			}
 
 			levelLoaded.Raise();
 		}
 		private void LoadNewLevel()
 		{
-			CurrentLevelData.instance.currentLevel++;
-			CurrentLevelData.instance.currentConsecutiveLevel++;
-			PlayerPrefs.SetInt( "Level", CurrentLevelData.instance.currentLevel );
-			PlayerPrefs.SetInt( "Consecutive Level", CurrentLevelData.instance.currentConsecutiveLevel );
+			CurrentLevelData.Instance.currentLevel++;
+			CurrentLevelData.Instance.currentConsecutiveLevel++;
+			PlayerPrefs.SetInt( "Level", CurrentLevelData.Instance.currentLevel );
+			PlayerPrefs.SetInt( "Consecutive Level", CurrentLevelData.Instance.currentConsecutiveLevel );
 
 
-			var _operation = SceneManager.UnloadSceneAsync( CurrentLevelData.instance.levelData.sceneIndex );
-			_operation.completed += ( AsyncOperation operation ) => LoadLevel();
+			var _operation = SceneManager.UnloadSceneAsync( CurrentLevelData.Instance.levelData.sceneIndex );
+			_operation.completed += ( AsyncOperation operation ) => StartCoroutine( LoadLevel() );
 		}
 		#endregion
 	}

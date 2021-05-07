@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a385bd3b4416492409284c9a366cb52a, type: 3}
+  m_Name: GameSettings
+  m_EditorClassIdentifier: 
+  maxLevelCount: 9
+  uiEntityMoveTweenDuration: 0.5
+  uiEntityScaleTweenDuration: 0.5
+  uiFloatingEntityTweenDuration: 0
+  swipeThreshold: 5
+  human:
+    startingHealth: 100
+    neutralizedColor: {r: 0, g: 0, b: 0, a: 1}
+    fullyDepletedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    fullHealthColor: {r: 1, g: 0.33333334, b: 0.33333334, a: 1}
+    runDistance: 3
+    hillJumpForce: 5
+    ragdollTurnoffTime: 4
+  camera_RotationVector: {x: 0, y: 15, z: 0}
+  weapon_water_fireRate: 0.15
+  weapon_fart_fireRate: 1
+  projectile_Speed: 25
+  projectile_fart_radius: 2
+  projectile_fart_delay: 1
+  projectile_target_triggerLayer: 3
+  projectile_beachBall_force: 50
+  projectile_beachBall_explosion_force: 500
+  projectile_beachBall_explosion_radius: 50
+  projectile_beachBall_explosion_upwardsModifier: 10
+  projectile_beachBall_disableAfterTime: 3

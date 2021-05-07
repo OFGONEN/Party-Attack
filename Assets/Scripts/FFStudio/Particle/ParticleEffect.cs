@@ -7,7 +7,10 @@ namespace FFStudio
 	public class ParticleEffect : MonoBehaviour
 	{
 		#region Fields
+		public EventListenerDelegateResponse loadNewLevelListener;
+
 		[Header( "Fired Events" )]
+		public ParticleEffectStack particleStack;
 		public StringGameEvent particleStoppedEvent;
 		public string alias;
 		private ParticleSystem particles;
@@ -15,9 +18,23 @@ namespace FFStudio
 
 		#region UnityAPI
 
+		private void OnEnable()
+		{
+			loadNewLevelListener.OnEnable();
+		}
+
+		private void OnDisable()
+		{
+			particleStack.stack.Push( this );
+
+			loadNewLevelListener.OnDisable();
+		}
+
 		private void Awake()
 		{
-			particles = GetComponent<ParticleSystem>();
+			particles = GetComponent< ParticleSystem >();
+
+			loadNewLevelListener.response = () => gameObject.SetActive( false );
 
 			var mainParticle = particles.main;
 
@@ -46,10 +63,7 @@ namespace FFStudio
 				transform.position = particleEvent.spawnPoint;
 
 			particles.Play();
-
-			FFLogger.Log( "Playing: " + alias + " active:" + gameObject.activeInHierarchy );
 		}
 		#endregion
-
 	}
 }
