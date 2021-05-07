@@ -9,9 +9,12 @@ public class FartBombProjectile : Projectile
 	#region Implementation
 	protected override void TargetReached()
 	{
+		var particleSpawnPosition = transform.position;
+		particleSpawnPosition.y = GameSettings.Instance.projectile_fart_Y_Position;
+
 		particleEvent.changePosition = true;
 		particleEvent.particleAlias = "Fart";
-		particleEvent.spawnPoint = transform.position;
+		particleEvent.spawnPoint = particleSpawnPosition;
 		particleEvent.Raise();
 
 		// movementTween = null;
