@@ -15,7 +15,7 @@ MonoBehaviour:
   sceneIndex: 1
   isGroundLevel: 0
   humanCount: 15
-  cameraPrefab: {fileID: 595622948803225185, guid: fed6b6d077683044698495b38bf7f8d2, type: 3}
+  cameraPrefab: {fileID: 3043028705919688778, guid: e4d31b6fc9b14f94d9a45237b4e90b7a, type: 3}
   skyboxMaterial: {fileID: 2100000, guid: b258a4feaf62b8a43b41c4c392aa1bc3, type: 2}
   weapon_water_ammoCount: 90
   weapon_fart_ammoCount: 1
